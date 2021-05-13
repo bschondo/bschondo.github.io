@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Benjamin Schondorf</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+</head>
+
+<body>
+    <ul class="navbar">
+        {% for section in sections %}
+            <a class="tab section" href="{{section.href}}">{{section.name}}</a>
+        {% endfor %}
+
+        {% for tab_icon in other_links %}
+            <a href="{{tab_icon.link}}">
+                <img class="tab icon" src="{{tab_icon.image}}" alt="{{tab_icon.alt}}">
+            </a>
+        {% endfor %}
+    </ul>
+
+    <div class="header">
+        <img class="headshot" src="resources/headshot1.jpg" alt="headshot">
+        <h1 class="name"> Benjamin Schondorf </h1>
+    </div>

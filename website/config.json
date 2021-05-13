@@ -1,0 +1,48 @@
+[
+    {
+        "url": "/",
+        "template": "base.html",
+        "context": {
+            "sections": [
+                {
+                    "href": "#aboutme",
+                    "name": "About Me"
+                },
+                {
+                    "href": "#education",
+                    "name": "Education"
+                },
+                {
+                    "href": "#experience",
+                    "name": "Experience"
+                },
+                {
+                    "href": "#projects",
+                    "name": "Projects"
+                },
+                {
+                    "href": "#extracurriculars",
+                    "name": "Extracurriculars"
+                }
+            ],
+            "other_links": [
+                {
+                    "link": "resources/Resume Winter 2020.pdf",
+                    "image": "resources/paper_icon_white.png",
+                    "alt": "Resume"
+                },
+                {
+                    "link": "https://www.linkedin.com/in/benjamin-schondorf/",
+                    "image": "resources/linkedin_logo.png",
+                    "alt": "LinkedIn"
+                },
+                {
+                    "link": "mailto:benschondorf@gmail.com",
+                    "image": "resources/email_logo.png",
+                    "alt": "Email"
+                }
+            ]
+
+        }
+    }
+]
