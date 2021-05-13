@@ -105,8 +105,8 @@ h3 {
 .content {
     width: inherit;
     padding: 1% 5%;
-    background-color: #CCC5CC;
-    background-color: #ffffffB3;
+    background-color: var(--white_back_solid);
+    background-color: var(--white_back_trans);
     display: block;
     margin-top: 100px;
     padding-bottom: 40px;
@@ -118,4 +118,81 @@ h3 {
     margin-right: auto;
     width: 80%;
     text-align: center;
+}
+
+.edu_split {
+    margin-top: 10px;
+    width: 50%;
+    height: inherit;
+    float: left;
+    background: inherit;
+}
+
+.edu_split.right {
+    padding-left: 8%;
+    margin-top: 20px;
+}
+
+.school {
+    margin: 0px 40px;
+}
+
+.school_header {
+    width: min-content;
+}
+
+.text_link{
+    text-decoration: none;
+    color:var(--light_purple);
+}
+
+.text_link:hover{
+    color: var(--dark_purple); 
+}
+
+.collapsible_vert.active,
+.collapsible_vert:hover {
+    background-color: var(--light_purple);
+}
+
+.collapsible_vert {
+    background-color: var(--dark_purple);
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 18px;
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    outline: none;
+    font-size: 20px;
+}
+
+.school_dropdown {
+    padding: 2%;
+    margin-left: inherit;
+    margin-top: 10px;
+    width: 100%;
+    display: none;
+    border: 1px solid black;
+    overflow: hidden;
+    background-color: var(--school_light_purple);
+    font-size: 20px;
+    flex-direction: column;
+}
+
+.subtitle {
+    font-size: 20px;
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+.bullets {
+    list-style-type: square;
+    padding-left: 8%;
+}
+
+.line {
+    margin: 20px 0px;
+    border: 2px solid black;
 }

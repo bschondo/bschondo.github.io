@@ -47,6 +47,108 @@
             "aboutme": {
                 "header": "About Me",
                 "text": "I am an experienced, passionate computer science major studying at the Univerity of Michigan - Ann Arbor. I'm an active member of Michigan Hackers on the cybersecurity team preparing to compete in hackathons. In addition to my major, I am minoring in music as well as playing clarinet in the Michigan Marching Band. This past summer I worked virtually at the startup Ocient as a software engineer intern. I am currently seeking an internship for the summer of 2021."
+            },
+            "education": {
+                "header": "Education",
+                "school_info": {
+                    "Name": "University of Michigan",
+                    "City": "Ann Arbor",
+                    "Dates": "2018-2021",
+                    "GPA": "3.53",
+                    "text": "I am completing my bachelor's degree in computer science through the college of engineering with a predicted graduation of December 2021. I decided to join <a class=\"text_link\" href=\"#extracurriculars\">Michigan Hackers</a> during my freshman year to improve my programming outside of class. In addition, I am minoring in music and a member of the <a class=\"text_link\" href=\"#extracurriculars\">Michigan Marching Band</a>. My areas of interest include cyber security, autonomous systems, robotics, and full-stack development.",
+                    "Class_Info": [
+                        {
+                            "time_range": "2018-2019",
+                            "semesters": [
+                                {
+                                    "name": "Fall 2018",
+                                    "classes": [
+                                        "Self-Driving Cars, Drones, and Beyond: An Intro to Autonomous Electronic Systems (ENGR 100)",
+                                        "Differential Equations (Math 216)",
+                                        "General Physics I (PHYSICS 140)",
+                                        "Campus Band (ENS 346)",
+                                        "Marching Band (ENS 348)"
+                                    ]
+                                },
+                                {
+                                    "name": "Winter 2019",
+                                    "classes": [
+                                        "Introduction to Computer and Programming (ENGR 101)",
+                                        "General Chemistry (CHEM 130)",
+                                        "Discrete Mathematics (EECS 203)",
+                                        "The History of the Arab-Israeli Conflict (HISTORY 244)",
+                                        "Entrepreneurship Hour (ENTR 407)"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "time_range": "2019-2020",
+                            "semesters": [
+                                {
+                                    "name": "Fall 2019",
+                                    "classes": [
+                                        "Programming and Intro Data Structures (EECS 280)",
+                                        "Entrepreneurship Hour (ENTR 407)",
+                                        "General Physics II (PHYSICS 240)",
+                                        "Introduction to Statistics and Data Analysis (STATS 250)",
+                                        "Marching Band (ENS 348)"
+                                    ]
+                                },
+                                {
+                                    "name": "Winter 2020 (Partially Virtual)",
+                                    "classes": [
+                                        "Data Structures and Algorithms (EECS 281)",
+                                        "Introduction to Computer Organization (EECS 370)",
+                                        "Technical Communications (TCHNCLCM 300)",
+                                        "History of Music (MUSICOL 346)",
+                                        "Campus Band (ENS 346)"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "time_range": "2020-2021",
+                            "semesters": [
+                                {
+                                    "name": "Fall 2020 (Virtual)",
+                                    "classes": [
+                                        "Foundations of Computer Science (EECS 376)",
+                                        "Introduction to Computer Security (EECS 388)",
+                                        "Web Systems (EECS 485)",
+                                        "Linear Algebra (MATH 214)"
+                                    ]
+                                },
+                                {
+                                    "name": "Winter 2021 (Virtual)",
+                                    "classes": [
+                                        "Software Engineering (EECS 481)",
+                                        "Introduction to Operating Systems (EECS 482)",
+                                        "Introduction to Statistical Computing (STATS 306)",
+                                        "Contemporary Moral Problems (PHIL 355)"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "time_range": "2021-Graduation",
+                            "semesters": [
+                                {
+                                    "name": "Fall 2021",
+                                    "classes": [
+                                        "Human-Centered Software and Design and Development (EECS 497)",
+                                        "Major Design Experience Professionalism (EECS 496)",
+                                        "Advanced Technical Communication for Computer Science (TCHNCLCM 497)",
+                                        "Intro to Music Theory (THEORY 137)",
+                                        "Naked Eye Astronomy (ASTRO 127)",
+                                        "Marching Band (ENS 348)",
+                                        "Campus Band (ENS 346)"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
         }
     }

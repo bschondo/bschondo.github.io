@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Benjamin Schondorf</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="javascript/script.js "></script>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 </head>
@@ -33,6 +34,48 @@
             <h1>{{aboutme.header}}</h1>
             <br>
             <p>{{aboutme.text}}</p>
+        </div>
+    </div>
+
+    <a name="education"></a>
+    <div class="content">
+        <div class="education">
+            <h1>{{education.header}}</h1>
+
+            <div class="edu_split left">
+                <div class="school">
+                    {% with school = education.school_info %}
+                        <div class="school_header">
+                            <h2>{{school.Name}}</h2>
+                            <div class="school_info">
+                                <i>{{school.City}}, {{school.Dates}}</i><br>
+                                <i>GPA: {{school.GPA}}</i>
+                            </div>
+                        </div>
+                        <br>
+                        <p>{{school.text|safe}}</p>
+                    {% endwith %}
+                </div>
+            </div>
+
+            <div class="edu_split right">
+                <!-- remember to add style="margin-top: 0;" to first one -->
+                {% for year in education.school_info.Class_Info %}
+                    <button class="collapsible_vert" {% if loop.first %} style="margin-top: 0;" {% endif %} onclick="openProject(event, '{{year.time_range}}', 'collapsible_vert', 'school_dropdown')">{{year.time_range}}</button>
+                    <div class=" school_dropdown" id="{{year.time_range}}">
+                        <!-- remember to add style="margin-top: 0;" to first one -->
+                        {% for semester in year.semesters %}
+                            <div class="subtitle" {% if loop.first %} style="margin-top: 0;" {% endif %}>{{semester.name}}</div>
+        
+                            <ul class="bullets">
+                                {% for class in semester.classes %}
+                                    <li>{{class}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>
