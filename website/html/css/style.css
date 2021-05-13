@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400i&display=swap');
+
+:root{
+    --white_back_solid: #CCC5CC;
+    --white_back_trans: #ffffffB3;
+    --light_purple: #35345C;
+    --dark_purple: #070438;
+    --school_light_purple: #a4a8d1;
+}
 * {
     margin: 0;
     padding: 0;
@@ -50,8 +58,8 @@ h3 {
 }
 
 .name {
-    background: #CCC5CC;
-    background: #ffffff80;
+    background: var(--white_back_solid);
+    background: var(--white_back_trans);
     border-radius: 10px;
     font-size: 50px;
     margin-left: auto;
@@ -64,7 +72,7 @@ h3 {
     list-style-type: none;
     height: min-content;
     overflow: hidden;
-    background-color: #35345C;
+    background-color: var(--light_purple);
     position: -webkit-sticky;
     /* Safari */
     position: sticky;
@@ -73,17 +81,21 @@ h3 {
 }
 
 .tab {
+    color: white;
+    text-align: center;
+    display: block;
+    text-decoration: none;
     float: left;
     height: 60px;
     padding: 15px 17px;
 }
 
-.section {
+/* .section {
     color: white;
     text-align: center;
     display: block;
     text-decoration: none;
-}
+} */
 
 .icon {
     padding: 6px;
@@ -92,4 +104,26 @@ h3 {
     display: inherit;
     height: 60px;
     width: auto;
+}
+
+.tab:hover{
+    background-color: var(--dark_purple);
+}
+
+.content {
+    width: inherit;
+    padding: 1% 5%;
+    background-color: #CCC5CC;
+    background-color: #ffffffB3;
+    display: block;
+    margin-top: 100px;
+    padding-bottom: 40px;
+    overflow: hidden;
+}
+
+.aboutme {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    text-align: center;
 }

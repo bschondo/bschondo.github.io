@@ -11,11 +11,11 @@
 
 <body>
     <ul class="navbar">
-        {% for section in sections %}
-            <a class="tab section" href="{{section.href}}">{{section.name}}</a>
+        {% for section in navbar.sections %}
+            <a class="tab" href="{{section.href}}">{{section.name}}</a>
         {% endfor %}
 
-        {% for tab_icon in other_links %}
+        {% for tab_icon in navbar.other_links %}
             <a href="{{tab_icon.link}}">
                 <img class="tab icon" src="{{tab_icon.image}}" alt="{{tab_icon.alt}}">
             </a>
@@ -26,3 +26,15 @@
         <img class="headshot" src="resources/headshot1.jpg" alt="headshot">
         <h1 class="name"> Benjamin Schondorf </h1>
     </div>
+
+    <a name="aboutme"></a>
+    <div class="content">
+        <div class="aboutme">
+            <h1>{{aboutme.header}}</h1>
+            <br>
+            <p>{{aboutme.text}}</p>
+        </div>
+    </div>
+</body>
+
+</html>

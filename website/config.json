@@ -3,46 +3,51 @@
         "url": "/",
         "template": "base.html",
         "context": {
-            "sections": [
-                {
-                    "href": "#aboutme",
-                    "name": "About Me"
-                },
-                {
-                    "href": "#education",
-                    "name": "Education"
-                },
-                {
-                    "href": "#experience",
-                    "name": "Experience"
-                },
-                {
-                    "href": "#projects",
-                    "name": "Projects"
-                },
-                {
-                    "href": "#extracurriculars",
-                    "name": "Extracurriculars"
-                }
-            ],
-            "other_links": [
-                {
-                    "link": "resources/Resume Winter 2020.pdf",
-                    "image": "resources/paper_icon_white.png",
-                    "alt": "Resume"
-                },
-                {
-                    "link": "https://www.linkedin.com/in/benjamin-schondorf/",
-                    "image": "resources/linkedin_logo.png",
-                    "alt": "LinkedIn"
-                },
-                {
-                    "link": "mailto:benschondorf@gmail.com",
-                    "image": "resources/email_logo.png",
-                    "alt": "Email"
-                }
-            ]
-
+            "navbar": {
+                "sections": [
+                    {
+                        "href": "#aboutme",
+                        "name": "About Me"
+                    },
+                    {
+                        "href": "#education",
+                        "name": "Education"
+                    },
+                    {
+                        "href": "#experience",
+                        "name": "Experience"
+                    },
+                    {
+                        "href": "#projects",
+                        "name": "Projects"
+                    },
+                    {
+                        "href": "#extracurriculars",
+                        "name": "Extracurriculars"
+                    }
+                ],
+                "other_links": [
+                    {
+                        "link": "resources/Resume Winter 2020.pdf",
+                        "image": "resources/paper_icon_white.png",
+                        "alt": "Resume"
+                    },
+                    {
+                        "link": "https://www.linkedin.com/in/benjamin-schondorf/",
+                        "image": "resources/linkedin_logo.png",
+                        "alt": "LinkedIn"
+                    },
+                    {
+                        "link": "mailto:benschondorf@gmail.com",
+                        "image": "resources/email_logo.png",
+                        "alt": "Email"
+                    }
+                ]
+            },
+            "aboutme": {
+                "header": "About Me",
+                "text": "I am an experienced, passionate computer science major studying at the Univerity of Michigan - Ann Arbor. I'm an active member of Michigan Hackers on the cybersecurity team preparing to compete in hackathons. In addition to my major, I am minoring in music as well as playing clarinet in the Michigan Marching Band. This past summer I worked virtually at the startup Ocient as a software engineer intern. I am currently seeking an internship for the summer of 2021."
+            }
         }
     }
 ]
