@@ -216,6 +216,569 @@
             </div>
         </div>
     </div>
+
+    <a name="projects"></a>
+    <div class="content" style="text-align: center;">
+        <div class="proj_header">
+            <h1>Projects</h1>
+            <br>
+        </div>
+
+        <div class="projects">
+            <div class="navbar" id="proj_bar">
+                
+                    <button class="collapsible_hor active" onclick="openProject(event, 'personal', 'collapsible_hor', 'proj_dropdown')">Personal Projects</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '100', 'collapsible_hor', 'proj_dropdown')">ENGR 100</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '280', 'collapsible_hor', 'proj_dropdown')">EECS 280</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '281', 'collapsible_hor', 'proj_dropdown')">EECS 281</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '370', 'collapsible_hor', 'proj_dropdown')">EECS 370</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '388', 'collapsible_hor', 'proj_dropdown')">EECS 388</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '481', 'collapsible_hor', 'proj_dropdown')">EECS 481</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '482', 'collapsible_hor', 'proj_dropdown')">EECS 482</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '485', 'collapsible_hor', 'proj_dropdown')">EECS 485</button>
+                
+            </div>
+
+            
+                <div class="proj_dropdown " id="personal" style="display: flex;">
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>This Website</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>I created this website as a personal project over the winter break of my sophomore year (2020). I taught myself the basics of HTML, CSS, and JavaScript to bring this together on my own time. I have since changed to be generated using python and Jinja. Feel free to contact me with any feedback.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/Home_picture.PNG" alt="Website Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Drone Light Show Animation</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>I created this simulation during the 2017 HiMCM competition. A series of drone positions were preprogrammed to create shapes. Then each drone would pick a location and travel to it. Different algorithms were used for telling drones how to choose their next position and we went with the one that was the most efficient.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/drone_animation.png" alt="Drone Simulation Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="100" >
+                    
+                        <h2 class="class_name">An Intro to Autonomous Electronic Systems</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Autonomous Drone Navigation</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The main project for my ENGR 100 class which consisted of making a drone navigate through a short obstacle course autonomously. The drone used one ultrasonic and four lidar sensors. The drone came with basic obstacle avoidance which would avoid objects when it got close to them. To complete the course I added filters to the sensor signals, a PID controller to the controls, and a vehicle navigation algorithm.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/drone_pic.JPG" alt="Drone Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="280" >
+                    
+                        <h2 class="class_name">Programming and Intro Data Structures</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Statistics Calculator</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project would take in a file of data values as input. Then the user would specify what part of the document they want the statistics calculated for. Finally, the program would calculate and print the statistics such as mean, median, mode, standard deviation, and quartiles.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/statistics_picture.png" alt="Statistics Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Image Resizing</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The purpose of this project was to resize an inputted image to specified dimensions using a technique called seam carving. Seam carving works by finding and removing “seams” in the image that pass through the least important pixels. After having reduced the image to the right dimensions, the program would save the resized versions to a new file with the dimensions in the file name.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/seam_carving_picture.png" alt="Seam Carving Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Euchre Simulator</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project consisted of simulating a game of euchre with both computer players and human players. This included, deck shuffling, dealing, playing tricks, scoring, and the computer&#39;s strategy. Computer players used a simple strategy that didn&#39;t take into account other players&#39; cards, only taking into account the suit that was led. Human players were informed of the board state and asked for input for every decision.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/euchre_picture.jpg" alt="Euchre Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>HTTP Requests</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>For this project, a file containing a specific HTTP request is read into the program. Then the program interprets the request and performs the necessary action. This project focused on adding people to a queue. GET, POST, and DELETE requests were used to change the queue and see who was currently waiting.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/http-requests.png" alt="HTTP Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Post Classification</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project used machine learning methods to classify the topic questions posted in an online forum. The classification method used was a simpler version of the &#34;Multi-Variate Bernoulli Naive Bayes Classifier&#34;. The classifier was trained using already classified posts and then was used to determine the most likely topic for unclassified posts.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/post_classification.png" alt="Speech Classification Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="281" >
+                    
+                        <h2 class="class_name">Data Structures and Algorithms</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Puzzle Solver</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project is a puzzle solver in which a map is read in from a file and the program attempts to determine the moves to solve it or classify it as unsolvable. The map contains the starting position, goal, open space, walls, buttons, doors, and traps. Buttons are used to unlock their corresponding door, and traps close all doors. The solver works by making a list of all possible moves and linking them together until one gets to the goal.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/maze_picture.jpg" alt="Maze Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Stocks on Stocks on Stocks</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I built a simulation of a stock market, with buyers and sellers posting orders into the market and automatically being paired when there is a match. In this simulation, orders were constrained to limit orders, and orders with earlier timestamps were selected in case of a tie. Orders were read using the command line and consisted of timestamp, trader id, stock id, buy/sell intent, price limit, and quantity.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/Stocks-Up.jpg" alt="Stock Market Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>SillyQL</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I built a database that could receive queries from the user, and successfully execute them in the database. This database supported the commands: CREATE, INSERT INTO, DELETE FROM, GENERATE INDEX, PRINT, JOIN, REMOVE, and QUIT. The program would parse valid commands from the command line, do the corresponding operation on the database before printing out a descriptive message of its actions back to the command line.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/SQL-database.jpg" alt="SQL Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Drone Delivery</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project was based around creating a company that handled on-campus delivery at universities using drones and is similar to the traveling salesman problem. First, coordinates are read in that specify the locations where drones can pick-up and drop-off packages. Then the program figures out the fastest way to visit every location on campus once and then returning to its starting location. To solve this problem, I first generated a starting path with a Nearest Insertion algorithm. Then to get closer to the best solution, I used a branch-and-bound recursive algorithm that used Prim&#39;s algorithms to determine if a branch was promising.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/Drone_delivery.jpeg" alt="Drone Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="370" >
+                    
+                        <h2 class="class_name">Introduction to Computer Organization</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>LC-2K Assembler and Simulator</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The project was split into three separate parts. First I built a single cycle assembler to convert LC-2K assembly code to machine code. Next, I created a program that could simulate any valid LC-2K machine code program. Finally, I wrote a program in assembly that could multiply two numbers together and used the program in conjunction with the simulator.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/code_hierarchy_picture.jpg" alt="Code Hierarchy Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>LC-2K Assembler and Linker</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The assembler part of this project builds on the one I made in project 1. I mainly added compatibility for the assembler to work with global variables and got it to output an object file that could be used by the linker in the next part of the project. Once finished I then built a linker that could combine multiple object files into an executable machine code file. Finally, I wrote an assembly function that calculated combinations using recursion which was compiled with my assembler and linker to be joined with a main file to be executed.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/linker.png" alt="Linker Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>LC-2K Pipeline Assembler</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project focused on modifying project 1&#39;s assembler to work as a pipeline instead of a single cycle assembler. My implementation used a class of pipeline registers that kept track of information in each stage of the pipeline between cycles. To handle data hazards, I implemented internal forwarding and, to handle control hazards used a detect-and-stall method.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/pipeline.jpg" alt="Pipeline Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Cache Simulator</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I added onto my simulator created in project 1 to implement a cache that is used whenever there is a read or write to memory. The caches block size, the number of sets, and blocks per set where specified in the command line arguments for each run of the program. This means the simulator needs to be made in such a way that it would work with any of a fully associative cache, a direct-mapping cache, or a set-associative cache.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/caching.png" alt="Caching Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="388" >
+                    
+                        <h2 class="class_name">Introduction to Computer Security</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Vulnerable Applications of Cryptography</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I performed multiple different attacks inspired by problems found in many real-world implementations such as Length Extension, Hashing Collisions, Frequency Analysis, RSA Signature Forgery, and Padding Oracle Attacks. The most interesting and complex problem was writing the program to execute the Padding Oracle Attack. I was given an encrypted message along with a URL that took an encrypted message and returned it if the message was valid or specified which error occurred (invalid mac or invalid padding). Using the information from the URL&#39;s responses, I built a program to decode the encrypted message bit by bit, using a padding oracle attack.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/hash_collision.png" alt="Hash Collision Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Attacking Insecure Website</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project focused on exploiting common types of vulnerabilities in insecure websites, specifically SQL injection, cross-site scripting (XSS), and cross-site request forgery (CSRF). Each attack had multiple levels of defense that needed to be broken, with each level increasing in difficulty and requiring a different approach. The website provided for the project included a login field, along with a search bar to search a database and a history bar of recent searches. The SQL injection was performed on the login part of the site and had defenses that included escaping quotes in the user input and applying a hash function to the password field. The XSS attack was executed in the search bar, and its defenses included removing the word script, common HTML tags, and some types of punctuation. The CSRF attack involved building a URL that would log the current user into an attacker&#39;s account on the insecure website when visited.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/sql-injection-attack.jpg" alt="SQL Injection Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Analyzing and Attacking Networks</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project focused on the vulnerabilities of network communication and had three parts. The first part consisted of analyzing network traffic data in Wireshark to determine what type of devices were communicating on the network. Part two involved writing a program in Go to read network traffic data to search for IP and MAC addresses exhibiting sketchy behavior. Such behavior included sending many more SYN packets than SYN+ACK packets or sending many unsolicited ARP replies. Part three of the project was to write a program to execute a man in the middle attack in GO. This included intercepting and spoofing DNS requests to a bank server from the client towards my IP. I also acted as an HTTP proxy, relaying the client&#39;s request to the bank&#39;s server and sending responses back. The twist in the project was to intercept all credentials/cookies sent by the client, in addition to changing any money transfer request to be sent to my bank account without alerting the client.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/mitm_attack.jpg" alt="Man in the Middle Attack Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Control-flow Hijacking</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I performed buffer-overflow attacks on seven vulnerable C programs. Each program required various techniques to cause the overflow, with each one increasing in difficulty. For the more advanced overflows, I had to open a bash shell as admin. Some of the defenses used by the programs include Data Execution Prevention (DEP), Address Space Layout Randomization (ASLR), and stack canaries. Some techniques I used to overcome these defenses include NOP sleds, return-to-libc, and return-oriented programming.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/buffer_overflow.png" alt="Buffer Overflow Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Digital Forensics Analysis</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The final and most enjoyable project in this course involved using digital forensics to look into an individual&#39;s hard drive and related websites to writing a report about whether the suspect committed a crime. To complete the project, I was responsible for finding tokens (ex. #token-ThisIsAToken) hidden in the hard drive and websites. To accomplish this task, I had to use many of the cryptographic skills I learned about in the course, include steganography, ciphers, buffer-overflow, cross-site scripting, brute force password hacking, and an understanding of the Linux environment. The most interesting part of the project involved signing a secret message with the private key found on the hard drive and sending it as a query to a server. Also, the user agent of the request had to be found in a steganographic image inside the hard drive. Solving this puzzle gave me the URL of a secret messaging board on Tor that the suspected criminal was known to use. Getting to this messaging board provided the necessary information to explain in my report which crimes the suspect had committed.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/digital_forensics.jpg" alt="Digital Forensics Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="481" >
+                    
+                        <h2 class="class_name">Software Engineering</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="482" >
+                    
+                        <h2 class="class_name">Introduction to Operating Systems</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2></h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p></p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="" alt="">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="485" >
+                    
+                        <h2 class="class_name">Web Systems</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Templated Static Site Generator</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project consisted of creating an Instagram clone with a templated static site generator. I learned how to use HTML, CSS, templates, Python, and basic shell scripts. The first part of the project involved making the HTML templates using the jinja framework. The next step was to add CSS and generate the JSON data for the templates. Finally, I used Python to retrieve data from the JSON files to populate the templates and generate the HTML to send to the client. Throughout this and future projects, shell scripts were used to compile and run all the necessary files to host the site locally.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/static_site_generator.png" alt="Static Site Generator Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Server-side Dynamic Pages</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project transitions the static site generator into a server-side, dynamic version of the Instagram clone. It reused the templates from the previous project and rendered them on demand when a user loads a page. New features include creating, updating, and deleting users, posts, comments, and likes. The most significant change was the introduction of Flask to handle all the server-side functionality. Flask also helped implement sessions to handle account login and connecting to an SQLite database to read/store user information.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/server_side.png" alt="Server-Side Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Client-side Dynamic Pages</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This final version of the Instagram clone implements it as a client-side dynamic page. Although many parts of the server-side version were able to be reused, a REST API and Javascript were added to handle the client-side components. When anything needed to be modified on the site, the client-side Javascript would make a call to the REST API to update the server-side database, in addition to updating the DOM. By converting the site to be client-side, I was able to implement double click to like, infinite scroll, and allow content to update without refreshing. </p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/client_side.jpg" alt="Client-Side Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Map Reduce</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I implemented a map-reduce server using python. It was a single machine, multi-process, multi-threaded server that executed user-submitted MapReduce jobs. The project was split up into a Master and Workers. Each worker would receive an executable to run, input directory, and output directory from the master. After completing its task, it would send a message to the master letting it know it was available for more tasks. Also, workers continually sent heartbeat messages to the master so it would know which workers were still online. The master handled all heartbeat messages using a UDP thread and all other messages using a TCP thread. Finally, the master was responsible for reassigning jobs to other workers from workers who had failed.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/mapreduce.jpg" alt="MapReduce Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Wikipedia Search Engine</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I built a scalable search engine similar in design to a commercial search engine. This search engine implements reverse indexing using MapReduce and PageRank using tf-idf. To create the inverted index table, a MapReduce program was used containing multiple reduction functions. The next step was building a REST API to act as an index server. The server would load the inverted index (calculated beforehand) and PageRank (provided) into memory on startup. Then, whenever the server received a query request, it would calculate the weight score for every document relevant to the query and return them in sorted order. The final part of the project was to create a search interface to act as the front end. The search interface was a server-side dynamic page, sending queries to the index server and using the response to update the page.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/wiki-search-engine.jpg" alt="Wikipedia Search Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+        </div>
+    </div>
 </body>
 
 </html>

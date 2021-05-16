@@ -5,7 +5,7 @@
     --white_back_trans: #ffffffB3;
     --light_purple: #35345C;
     --dark_purple: #070438;
-    --school_light_purple: #a4a8d1;
+    --light_purple_background: #a4a8d1;
 }
 * {
     margin: 0;
@@ -176,7 +176,7 @@ h3 {
     display: none;
     border: 1px solid black;
     overflow: hidden;
-    background-color: var(--school_light_purple);
+    background-color: var(--light_purple_background);
     font-size: 20px;
     flex-direction: column;
 }
@@ -195,4 +195,92 @@ h3 {
 .line {
     margin: 20px 0px;
     border: 2px solid black;
+}
+
+.proj_header {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.projects {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar#proj_bar {
+    width: inherit;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    /* background: rgb(7, 4, 56);
+    border: 2px solid black; */
+    background: none;
+    z-index: 0;
+}
+
+.collapsible_hor {
+    /* float: left; */
+    display: inline-block;
+    margin-top: 0px;
+    padding: 10px 0px;
+    /* width: 250px; */
+    background: var(--dark_purple);
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    flex: 1;
+}
+
+.collapsible_hor.active,
+.collapsible_hor:hover {
+    background: var(--light_purple);
+}
+
+.proj_dropdown {
+    display: none;
+    margin-top: 20px;
+    padding: 30px;
+    background: var(--light_purple_background);
+    border: 1px solid black;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+.class_name{
+    text-align: center;
+    margin: 0 auto 20px auto;
+    font-size: 40px;
+    text-decoration: underline;
+}
+
+.proj_body {
+    margin-top: 50px;
+    width: inherit;
+    text-align: left;
+}
+
+.proj_body h2 {
+    text-decoration: underline;
+}
+
+.proj_split {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.proj_split.left {
+    width: 65%;
+}
+
+.proj_split.right {
+    width: 30%;
+}
+
+.proj_pictures {
+    width: 100%;
+    margin-left: 20px;
+    height: auto;
 }
