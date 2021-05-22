@@ -197,6 +197,48 @@ h3 {
     border: 2px solid black;
 }
 
+.exp_section {
+    margin-top: 30px;
+}
+
+.exp_heading {
+    width: min-content;
+    display: table;
+}
+
+.time_range {
+    font-size: 17px;
+    width: max-content;
+}
+
+.exp_body {
+    clear: both;
+    height: max-content;
+    width: inherit;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.exp_split {
+    width: 50%;
+    height: inherit;
+}
+
+.exp_split.left {
+    width: 70%;
+}
+
+.exp_split.right {
+    width: 26%;
+    margin: auto;
+}
+
+.logo {
+    width: 100%;
+    display: block;
+}
+
 .proj_header {
     width: 80%;
     margin: 0 auto;

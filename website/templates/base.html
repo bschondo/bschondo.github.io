@@ -79,6 +79,33 @@
         </div>
     </div>
 
+    <a name="experience"></a>
+    <div class="content">
+        <div class="experience">
+            <h1>{{experience.header}}</h1>
+        </div>
+
+        {% for job in experience.jobs %}
+            <div class="exp_section" {% if loop.first %}style="margin-top: 0px;"{% endif %}>
+                <div class="exp_heading">
+                    <h2>{{job.name}}</h2>
+                    <h3>{{job.role}}</h3>
+                    <div class="time_range"><i>{{job.time_range}}</i></div>
+                </div>
+                <div class="exp_body">
+                    <div class="exp_split left">
+                        {{job.text}}
+                    </div>
+                    <div class="exp_split right">
+                        <img class="logo" src="{{job.image}}" alt="{{job.alt}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="line"></div>
+        {% endfor %}
+    </div>
+
     <a name="projects"></a>
     <div class="content" style="text-align: center;">
         <div class="proj_header">
@@ -115,6 +142,29 @@
                 </div>
             {% endfor %}
         </div>
+    </div>
+
+    <a name="extracurriculars"></a>
+    <div class="content" style="margin-bottom: 20px;">
+        <div class="extracurriculars ">
+            <h1>{{extracurricular.header}}</h1>
+        </div>
+        {% for activity in extracurricular.activities %}
+        <div class="exp_section" {% if loop.first %}style="margin-top: 0px;"{% endif %}>
+            <div class="exp_heading">
+                <h2>{{activity.name}}</h2>
+                <div class="time_range"><i>{{activity.time_range}}</i></div>
+            </div>
+            <div class="exp_body">
+                <div class="exp_split left">
+                    {{activity.text}}
+                </div>
+                <div class="exp_split right">
+                    <img class="logo" src="{{activity.image}}" alt="{{activity.alt}}">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </body>
 
