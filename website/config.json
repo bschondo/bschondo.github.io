@@ -28,7 +28,7 @@
                 ],
                 "other_links": [
                     {
-                        "link": "resources/Resume Winter 2020.pdf",
+                        "link": "resources/Benjamin_Schondorf_Resume.pdf",
                         "image": "resources/paper_icon_white.png",
                         "alt": "Resume"
                     },
@@ -46,7 +46,7 @@
             },
             "aboutme": {
                 "header": "About Me",
-                "text": "I am an experienced, passionate computer science major studying at the Univerity of Michigan - Ann Arbor. I'm an active member of Michigan Hackers on the cybersecurity team preparing to compete in hackathons. In addition to my major, I am minoring in music as well as playing clarinet in the Michigan Marching Band. This past summer I worked virtually at the startup Ocient as a software engineer intern. I am currently seeking an internship for the summer of 2021."
+                "text": "I am an experienced, passionate computer science major studying at the Univerity of Michigan - Ann Arbor. I'm in my final semester of college and looking for a software engineering job with an expected start date around February 2022. My areas of interest include but are not limited to robotics, autonomous systems, cyber-security, and backend development. When I'm not coding, a big part of my life is music. I'm in my fourth year as a member of the clarinet section in the Michigan Marching Band, in addition to getting a Music minor. My other interests include rock climbing, reading, biking, politics, and sustainability."
             },
             "education": {
                 "header": "Education",
@@ -55,7 +55,7 @@
                     "City": "Ann Arbor",
                     "Dates": "2018-2021",
                     "GPA": "3.53",
-                    "text": "I am completing my bachelor's degree in computer science through the college of engineering with a predicted graduation of December 2021. I decided to join <a class=\"text_link\" href=\"#extracurriculars\">Michigan Hackers</a> during my freshman year to improve my programming outside of class. In addition, I am minoring in music and a member of the <a class=\"text_link\" href=\"#extracurriculars\">Michigan Marching Band</a>. My areas of interest include cyber security, autonomous systems, robotics, and full-stack development.",
+                    "text": "I am completing my bachelor's degree in computer science through the college of engineering with a predicted graduation of December 2021. I decided to join <a class=\"text_link\" href=\"#extracurriculars\">Michigan Hackers</a> during my freshman year to improve my programming outside of class. In addition, I am minoring in music and a member of the <a class=\"text_link\" href=\"#extracurriculars\">Michigan Marching Band</a>. The computer science electives I've taken include Computer Security, Web Systems, Operating Systems, and Software Engineering.",
                     "Class_Info": [
                         {
                             "time_range": "2018-2019",
@@ -157,7 +157,7 @@
                         "name": "IBM",
                         "role": "Extreme Blue Technical Intern",
                         "time_range": "Austin, May 2021 - August 2021",
-                        "text": "Currently in progress.",
+                        "text": "I worked on a team of four interns to develop a web application to automate requesting, approving, creating, and cleaning SAN storage. Since the team consisted of only interns, I gained experience making code architecture decisions and deciding which customer deliverables needed prioritization. I led the efforts to build a Python API to interface with the switches and storage containers used for testing. In addition, I developed a large portion of the back-end Flask Rest API  and the MongoDB database used by the application. The application we created was estimated to increase testing efficiency by 24%, leading to an anticipated savings of $1.45 million in savings per year.",
                         "image": "resources/IBM_logo.png",
                         "alt": "IBM Logo"
                     },
@@ -165,7 +165,7 @@
                         "name": "Ocient",
                         "role": "Software Engineer Intern",
                         "time_range": "Chicago, May 2020 - August 2020",
-                        "text": "Throughout my virtual internship, I worked on both the testing and query management team (cmdcomp). On the testing team, I added a code static analysis tool to run nightly on the codebase through the Gitlab CI/CD pipeline and provide a report in the morning of bugs/errors found. I also built a dashboard to generate graphs of the information created by the CI/CD pipelines focusing on average queue time, run time, and the number of pipelines in a given time. These projects will help ensure that bugs are caught early in the development process and help the testing team find holes in the testing infrastructure. On the cmdcomp team, I worked on adding compatibility for functions from SQL Server, PostgreSQL, and Oracle/PLSQL to allow Ocient's database to be compatible with many different querying languages. Working on this team gave me more exposure to the inner workings of the codebase and was great practice for writing production-ready code.",
+                        "text": "Throughout my internship, I worked on both the testing and query management team (cmdcomp). On the testing team, I added a code static analysis tool to run nightly on the codebase through the Gitlab CI/CD pipeline and provide a report in the morning of bugs/errors found. I also built a dashboard to generate graphs of the information created by the CI/CD pipelines focusing on average queue time, run time, and the number of pipelines in a given time. These projects will help ensure that bugs are caught early in the development process and help the testing team find holes in the testing infrastructure. On the cmdcomp team, I worked on adding compatibility for functions from SQL Server, PostgreSQL, and Oracle/PLSQL to allow Ocient's database to be compatible with many different querying languages. Working on this team gave me more exposure to the inner workings of the codebase and was great practice for writing production-ready code.",
                         "image": "resources/Ocient-logo.png",
                         "alt": "Ocient Logo"
                     },
@@ -196,13 +196,13 @@
                         "title": "",
                         "projects": [
                             {
-                                "name": "This Website",
+                                "name": "This Website (Javascript, Python)",
                                 "text": "I created this website as a personal project over the winter break of my sophomore year (2020). I taught myself the basics of HTML, CSS, and JavaScript to bring this together on my own time. I have since changed to be generated using python and Jinja. Feel free to contact me with any feedback.",
                                 "pic_url": "resources/Home_picture.PNG",
                                 "alt": "Website Picture"
                             },
                             {
-                                "name": "Drone Light Show Animation",
+                                "name": "Drone Light Show Animation (Processing)",
                                 "text": "I created this simulation during the 2017 HiMCM competition. A series of drone positions were preprogrammed to create shapes. Then each drone would pick a location and travel to it. Different algorithms were used for telling drones how to choose their next position and we went with the one that was the most efficient.",
                                 "pic_url": "resources/drone_animation.png",
                                 "alt": "Drone Simulation Picture"
@@ -215,7 +215,7 @@
                         "title": "An Intro to Autonomous Electronic Systems",
                         "projects": [
                             {
-                                "name": "Autonomous Drone Navigation",
+                                "name": "Autonomous Drone Navigation (C++)",
                                 "text": "The main project for my ENGR 100 class which consisted of making a drone navigate through a short obstacle course autonomously. The drone used one ultrasonic and four lidar sensors. The drone came with basic obstacle avoidance which would avoid objects when it got close to them. To complete the course I added filters to the sensor signals, a PID controller to the controls, and a vehicle navigation algorithm.",
                                 "pic_url": "resources/drone_pic.JPG",
                                 "alt": "Drone Picture"
@@ -228,31 +228,31 @@
                         "title": "Programming and Intro Data Structures",
                         "projects": [
                             {
-                                "name": "Statistics Calculator",
+                                "name": "Statistics Calculator (C++)",
                                 "text": "This project would take in a file of data values as input. Then the user would specify what part of the document they want the statistics calculated for. Finally, the program would calculate and print the statistics such as mean, median, mode, standard deviation, and quartiles.",
                                 "pic_url": "resources/statistics_picture.png",
                                 "alt": "Statistics Picture"
                             },
                             {
-                                "name": "Image Resizing",
+                                "name": "Image Resizing (C++)",
                                 "text": "The purpose of this project was to resize an inputted image to specified dimensions using a technique called seam carving. Seam carving works by finding and removing “seams” in the image that pass through the least important pixels. After having reduced the image to the right dimensions, the program would save the resized versions to a new file with the dimensions in the file name.",
                                 "pic_url": "resources/seam_carving_picture.png",
                                 "alt": "Seam Carving Picture"
                             },
                             {
-                                "name": "Euchre Simulator",
+                                "name": "Euchre Simulator (C++)",
                                 "text": "This project consisted of simulating a game of euchre with both computer players and human players. This included, deck shuffling, dealing, playing tricks, scoring, and the computer's strategy. Computer players used a simple strategy that didn't take into account other players' cards, only taking into account the suit that was led. Human players were informed of the board state and asked for input for every decision.",
                                 "pic_url": "resources/euchre_picture.jpg",
                                 "alt": "Euchre Picture"
                             },
                             {
-                                "name": "HTTP Requests",
+                                "name": "HTTP Requests (C++)",
                                 "text": "For this project, a file containing a specific HTTP request is read into the program. Then the program interprets the request and performs the necessary action. This project focused on adding people to a queue. GET, POST, and DELETE requests were used to change the queue and see who was currently waiting.",
                                 "pic_url": "resources/http-requests.png",
                                 "alt": "HTTP Picture"
                             },
                             {
-                                "name": "Post Classification",
+                                "name": "Post Classification (C++)",
                                 "text": "This project used machine learning methods to classify the topic questions posted in an online forum. The classification method used was a simpler version of the \"Multi-Variate Bernoulli Naive Bayes Classifier\". The classifier was trained using already classified posts and then was used to determine the most likely topic for unclassified posts.",
                                 "pic_url": "resources/post_classification.png",
                                 "alt": "Speech Classification Picture"
@@ -265,25 +265,25 @@
                         "title": "Data Structures and Algorithms",
                         "projects": [
                             {
-                                "name": "Puzzle Solver",
+                                "name": "Puzzle Solver (C++)",
                                 "text": "This project is a puzzle solver in which a map is read in from a file and the program attempts to determine the moves to solve it or classify it as unsolvable. The map contains the starting position, goal, open space, walls, buttons, doors, and traps. Buttons are used to unlock their corresponding door, and traps close all doors. The solver works by making a list of all possible moves and linking them together until one gets to the goal.",
                                 "pic_url": "resources/maze_picture.jpg",
                                 "alt": "Maze Picture"
                             },
                             {
-                                "name": "Stocks on Stocks on Stocks",
+                                "name": "Stocks on Stocks on Stocks (C++)",
                                 "text": "In this project, I built a simulation of a stock market, with buyers and sellers posting orders into the market and automatically being paired when there is a match. In this simulation, orders were constrained to limit orders, and orders with earlier timestamps were selected in case of a tie. Orders were read using the command line and consisted of timestamp, trader id, stock id, buy/sell intent, price limit, and quantity.",
                                 "pic_url": "resources/Stocks-Up.jpg",
                                 "alt": "Stock Market Picture"
                             },
                             {
-                                "name": "SillyQL",
+                                "name": "SillyQL (C++)",
                                 "text": "In this project, I built a database that could receive queries from the user, and successfully execute them in the database. This database supported the commands: CREATE, INSERT INTO, DELETE FROM, GENERATE INDEX, PRINT, JOIN, REMOVE, and QUIT. The program would parse valid commands from the command line, do the corresponding operation on the database before printing out a descriptive message of its actions back to the command line.",
                                 "pic_url": "resources/SQL-database.jpg",
                                 "alt": "SQL Picture"
                             },
                             {
-                                "name": "Drone Delivery",
+                                "name": "Drone Delivery (C++)",
                                 "text": "This project was based around creating a company that handled on-campus delivery at universities using drones and is similar to the traveling salesman problem. First, coordinates are read in that specify the locations where drones can pick-up and drop-off packages. Then the program figures out the fastest way to visit every location on campus once and then returning to its starting location. To solve this problem, I first generated a starting path with a Nearest Insertion algorithm. Then to get closer to the best solution, I used a branch-and-bound recursive algorithm that used Prim's algorithms to determine if a branch was promising.",
                                 "pic_url": "resources/Drone_delivery.jpeg",
                                 "alt": "Drone Picture"
@@ -296,25 +296,25 @@
                         "title": "Introduction to Computer Organization",
                         "projects": [
                             {
-                                "name": "LC-2K Assembler and Simulator",
+                                "name": "LC-2K Assembler and Simulator (C)",
                                 "text": "The project was split into three separate parts. First I built a single cycle assembler to convert LC-2K assembly code to machine code. Next, I created a program that could simulate any valid LC-2K machine code program. Finally, I wrote a program in assembly that could multiply two numbers together and used the program in conjunction with the simulator.",
                                 "pic_url": "resources/code_hierarchy_picture.jpg",
                                 "alt": "Code Hierarchy Picture"
                             },
                             {
-                                "name": "LC-2K Assembler and Linker",
+                                "name": "LC-2K Assembler and Linker (C)",
                                 "text": "The assembler part of this project builds on the one I made in project 1. I mainly added compatibility for the assembler to work with global variables and got it to output an object file that could be used by the linker in the next part of the project. Once finished I then built a linker that could combine multiple object files into an executable machine code file. Finally, I wrote an assembly function that calculated combinations using recursion which was compiled with my assembler and linker to be joined with a main file to be executed.",
                                 "pic_url": "resources/linker.png",
                                 "alt": "Linker Picture"
                             },
                             {
-                                "name": "LC-2K Pipeline Assembler",
+                                "name": "LC-2K Pipeline Assembler (C)",
                                 "text": "This project focused on modifying project 1's assembler to work as a pipeline instead of a single cycle assembler. My implementation used a class of pipeline registers that kept track of information in each stage of the pipeline between cycles. To handle data hazards, I implemented internal forwarding and, to handle control hazards used a detect-and-stall method.",
                                 "pic_url": "resources/pipeline.jpg",
                                 "alt": "Pipeline Picture"
                             },
                             {
-                                "name": "Cache Simulator",
+                                "name": "Cache Simulator (C)",
                                 "text": "In this project, I added onto my simulator created in project 1 to implement a cache that is used whenever there is a read or write to memory. The caches block size, the number of sets, and blocks per set where specified in the command line arguments for each run of the program. This means the simulator needs to be made in such a way that it would work with any of a fully associative cache, a direct-mapping cache, or a set-associative cache.",
                                 "pic_url": "resources/caching.png",
                                 "alt": "Caching Picture"
@@ -327,31 +327,31 @@
                         "title": "Introduction to Computer Security",
                         "projects": [
                             {
-                                "name": "Vulnerable Applications of Cryptography",
+                                "name": "Vulnerable Applications of Cryptography (Python)",
                                 "text": "In this project, I performed multiple different attacks inspired by problems found in many real-world implementations such as Length Extension, Hashing Collisions, Frequency Analysis, RSA Signature Forgery, and Padding Oracle Attacks. The most interesting and complex problem was writing the program to execute the Padding Oracle Attack. I was given an encrypted message along with a URL that took an encrypted message and returned it if the message was valid or specified which error occurred (invalid mac or invalid padding). Using the information from the URL's responses, I built a program to decode the encrypted message bit by bit, using a padding oracle attack.",
                                 "pic_url": "resources/hash_collision.png",
                                 "alt": "Hash Collision Picture"
                             },
                             {
-                                "name": "Attacking Insecure Website",
+                                "name": "Attacking Insecure Website (Python)",
                                 "text": "This project focused on exploiting common types of vulnerabilities in insecure websites, specifically SQL injection, cross-site scripting (XSS), and cross-site request forgery (CSRF). Each attack had multiple levels of defense that needed to be broken, with each level increasing in difficulty and requiring a different approach. The website provided for the project included a login field, along with a search bar to search a database and a history bar of recent searches. The SQL injection was performed on the login part of the site and had defenses that included escaping quotes in the user input and applying a hash function to the password field. The XSS attack was executed in the search bar, and its defenses included removing the word script, common HTML tags, and some types of punctuation. The CSRF attack involved building a URL that would log the current user into an attacker's account on the insecure website when visited.",
                                 "pic_url": "resources/sql-injection-attack.jpg",
                                 "alt": "SQL Injection Picture"
                             },
                             {
-                                "name": "Analyzing and Attacking Networks",
+                                "name": "Analyzing and Attacking Networks (Golang)",
                                 "text": "This project focused on the vulnerabilities of network communication and had three parts. The first part consisted of analyzing network traffic data in Wireshark to determine what type of devices were communicating on the network. Part two involved writing a program in Go to read network traffic data to search for IP and MAC addresses exhibiting sketchy behavior. Such behavior included sending many more SYN packets than SYN+ACK packets or sending many unsolicited ARP replies. Part three of the project was to write a program to execute a man in the middle attack in GO. This included intercepting and spoofing DNS requests to a bank server from the client towards my IP. I also acted as an HTTP proxy, relaying the client's request to the bank's server and sending responses back. The twist in the project was to intercept all credentials/cookies sent by the client, in addition to changing any money transfer request to be sent to my bank account without alerting the client.",
                                 "pic_url": "resources/mitm_attack.jpg",
                                 "alt": "Man in the Middle Attack Picture"
                             },
                             {
-                                "name": "Control-flow Hijacking",
+                                "name": "Control-flow Hijacking (Python)",
                                 "text": "In this project, I performed buffer-overflow attacks on seven vulnerable C programs. Each program required various techniques to cause the overflow, with each one increasing in difficulty. For the more advanced overflows, I had to open a bash shell as admin. Some of the defenses used by the programs include Data Execution Prevention (DEP), Address Space Layout Randomization (ASLR), and stack canaries. Some techniques I used to overcome these defenses include NOP sleds, return-to-libc, and return-oriented programming.",
                                 "pic_url": "resources/buffer_overflow.png",
                                 "alt": "Buffer Overflow Picture"
                             },
                             {
-                                "name": "Digital Forensics Analysis",
+                                "name": "Digital Forensics Analysis (Python)",
                                 "text": "The final and most enjoyable project in this course involved using digital forensics to look into an individual's hard drive and related websites to writing a report about whether the suspect committed a crime. To complete the project, I was responsible for finding tokens (ex. #token-ThisIsAToken) hidden in the hard drive and websites. To accomplish this task, I had to use many of the cryptographic skills I learned about in the course, include steganography, ciphers, buffer-overflow, cross-site scripting, brute force password hacking, and an understanding of the Linux environment. The most interesting part of the project involved signing a secret message with the private key found on the hard drive and sending it as a query to a server. Also, the user agent of the request had to be found in a steganographic image inside the hard drive. Solving this puzzle gave me the URL of a secret messaging board on Tor that the suspected criminal was known to use. Getting to this messaging board provided the necessary information to explain in my report which crimes the suspect had committed.",
                                 "pic_url": "resources/digital_forensics.jpg",
                                 "alt": "Digital Forensics Picture"
@@ -359,76 +359,33 @@
                         ]
                     },
                     {
-                        "id": "481",
-                        "class_name": "EECS 481",
-                        "title": "Software Engineering",
-                        "projects": [
-                            {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
-                            },
-                            {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
-                            },
-                            {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
-                            },
-                            {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
-                            },
-                            {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
-                            },
-                            {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
-                            }
-                        ]
-                    },
-                    {
                         "id": "482",
                         "class_name": "EECS 482",
-                        "title": "Introduction to Operating Systems",
+                        "title": "Introduction to Operating Systems (C++)",
                         "projects": [
                             {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
+                                "name": "Disk Scheduler (C++)",
+                                "text": "In this project, I wrote a concurrent program that issues and services disk requests to teach the basics of threading. On startup, the program creates a specified number of requester threads to issue requests and one thread to service requests. While running, the servicer thread handles requests in shortest seek time first (SSTF) order. Additionally, it will only serve requests when its request queue is filled to maximize the number of requests it can choose.",
+                                "pic_url": "resources/Disk_Scheduler.jpg",
+                                "alt": "Disk Scheduler Picture"
                             },
                             {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
+                                "name": "Thread Library (C++)",
+                                "text": "In this project, I built a thread library which that was able to create threads, cvs, and mutexes. Threads had a yield function that allowed them to voluntarily give up the CPU to the next runnable thread. I used the Linux ucontext.h library in this project to handle context switching (getcontext, makecontext, setcontext, swapcontext). Overall, this project gave me a much better understanding of how threads work and how to use them efficiently.",
+                                "pic_url": "resources/multithreading.jpeg",
+                                "alt": "Multithreading Picture"
                             },
                             {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
+                                "name": "Memory Manager (C++)",
+                                "text": "In this project, I designed and implemented a pager (the part of the kernel that handles virtual address spaces). My pager provided allowed processes to read and write data to swap files and/or regular files. Data stored in swap files are private to processes and are freed when the process exits. Data in regular files could be accessed simultaneously by processes and lived beyond the lifetime of any given process. Programs used the pager by making calls to vm_map(filename, block), which returned a pointer to the correct memory location.",
+                                "pic_url": "resources/memory_allocation.png",
+                                "alt": "Memory Managment Picture"
                             },
                             {
-                                "name": "",
-                                "text": "",
-                                "pic_url": "",
-                                "alt": ""
+                                "name": "Network File Server (C++)",
+                                "text": "In this project, I implemented a multi-threaded network file server. This was my first time writing a substantial multi-threaded program. While processing requests, the file server used handed-over-hand locking to prevent race conditions when reading and writing to files. Overall, I gained a better understanding of hierarchical file systems, socket programming, client-server systems, and network protocols.",
+                                "pic_url": "resources/file_server.jpg",
+                                "alt": "File Server Picture"
                             }
                         ]
                     },
@@ -438,31 +395,31 @@
                         "title": "Web Systems",
                         "projects": [
                             {
-                                "name": "Templated Static Site Generator",
+                                "name": "Templated Static Site Generator (Python, HTML)",
                                 "text": "This project consisted of creating an Instagram clone with a templated static site generator. I learned how to use HTML, CSS, templates, Python, and basic shell scripts. The first part of the project involved making the HTML templates using the jinja framework. The next step was to add CSS and generate the JSON data for the templates. Finally, I used Python to retrieve data from the JSON files to populate the templates and generate the HTML to send to the client. Throughout this and future projects, shell scripts were used to compile and run all the necessary files to host the site locally.",
                                 "pic_url": "resources/static_site_generator.png",
                                 "alt": "Static Site Generator Picture"
                             },
                             {
-                                "name": "Server-side Dynamic Pages",
+                                "name": "Server-side Dynamic Pages (PYthon, HTML)",
                                 "text": "This project transitions the static site generator into a server-side, dynamic version of the Instagram clone. It reused the templates from the previous project and rendered them on demand when a user loads a page. New features include creating, updating, and deleting users, posts, comments, and likes. The most significant change was the introduction of Flask to handle all the server-side functionality. Flask also helped implement sessions to handle account login and connecting to an SQLite database to read/store user information.",
                                 "pic_url": "resources/server_side.png",
                                 "alt": "Server-Side Picture"
                             },
                             {
-                                "name": "Client-side Dynamic Pages",
+                                "name": "Client-side Dynamic Pages (Python, HTML, Javascript)",
                                 "text": "This final version of the Instagram clone implements it as a client-side dynamic page. Although many parts of the server-side version were able to be reused, a REST API and Javascript were added to handle the client-side components. When anything needed to be modified on the site, the client-side Javascript would make a call to the REST API to update the server-side database, in addition to updating the DOM. By converting the site to be client-side, I was able to implement double click to like, infinite scroll, and allow content to update without refreshing. ",
                                 "pic_url": "resources/client_side.jpg",
                                 "alt": "Client-Side Picture"
                             },
                             {
-                                "name": "Map Reduce",
+                                "name": "Map Reduce (Python)",
                                 "text": "In this project, I implemented a map-reduce server using python. It was a single machine, multi-process, multi-threaded server that executed user-submitted MapReduce jobs. The project was split up into a Master and Workers. Each worker would receive an executable to run, input directory, and output directory from the master. After completing its task, it would send a message to the master letting it know it was available for more tasks. Also, workers continually sent heartbeat messages to the master so it would know which workers were still online. The master handled all heartbeat messages using a UDP thread and all other messages using a TCP thread. Finally, the master was responsible for reassigning jobs to other workers from workers who had failed.",
                                 "pic_url": "resources/mapreduce.jpg",
                                 "alt": "MapReduce Picture"
                             },
                             {
-                                "name": "Wikipedia Search Engine",
+                                "name": "Wikipedia Search Engine (Python, HTML, Javascript)",
                                 "text": "In this project, I built a scalable search engine similar in design to a commercial search engine. This search engine implements reverse indexing using MapReduce and PageRank using tf-idf. To create the inverted index table, a MapReduce program was used containing multiple reduction functions. The next step was building a REST API to act as an index server. The server would load the inverted index (calculated beforehand) and PageRank (provided) into memory on startup. Then, whenever the server received a query request, it would calculate the weight score for every document relevant to the query and return them in sorted order. The final part of the project was to create a search interface to act as the front end. The search interface was a server-side dynamic page, sending queries to the index server and using the response to update the page.",
                                 "pic_url": "resources/wiki-search-engine.jpg",
                                 "alt": "Wikipedia Search Picture"
