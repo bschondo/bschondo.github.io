@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -Eeuo pipefail
-set -x
 
 # Clean
 rm -rf website/html
@@ -9,6 +8,10 @@ rm -rf website/html
 # Build
 website_generator website
 
-# Serve
-cd website/html
-python3 -m http.server 8000
+if [ -z ${1+x} ]; then 
+    # Serve
+    cd website/html
+    python3 -m http.server 8000
+else
+    echo "build only"
+fi
