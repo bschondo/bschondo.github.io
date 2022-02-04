@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Benjamin Schondorf</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="javascript/script.js "></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+</head>
+
+<body>
+    <ul class="navbar">
+        
+            <a class="tab" href="#aboutme">About Me</a>
+        
+            <a class="tab" href="#education">Education</a>
+        
+            <a class="tab" href="#experience">Experience</a>
+        
+            <a class="tab" href="#projects">Projects</a>
+        
+            <a class="tab" href="#extracurriculars">Extracurriculars</a>
+        
+
+        
+            <a href="resources/Benjamin_Schondorf_Resume.pdf">
+                <img class="tab icon" src="resources/paper_icon_white.png" alt="Resume">
+            </a>
+        
+            <a href="https://www.linkedin.com/in/benjamin-schondorf/">
+                <img class="tab icon" src="resources/linkedin_logo.png" alt="LinkedIn">
+            </a>
+        
+            <a href="mailto:benschondorf@gmail.com">
+                <img class="tab icon" src="resources/email_logo.png" alt="Email">
+            </a>
+        
+    </ul>
+
+    <div class="header">
+        <img class="headshot" src="resources/headshot_new.jpg" alt="headshot">
+        <h1 class="name"> Benjamin Schondorf </h1>
+    </div>
+
+    <a name="aboutme"></a>
+    <div class="content">
+        <div class="aboutme">
+            <h1>About Me</h1>
+            <br>
+            <p>I am an experienced, passionate software developer working at Amazon Robotics in Woburn, MA. My areas of interest include but are not limited to robotics, autonomous systems, cyber-security, and backend development. When I&#39;m not coding, a big part of my life is music. I was a four member of the clarinet section in the Michigan Marching Band and I&#39;m not in the process of learning to play guitar. My other interests include rock climbing, reading, biking, taekwondo, and sustainability.</p>
+        </div>
+    </div>
+
+    <a name="education"></a>
+    <div class="content">
+        <div class="education">
+            <h1>Education</h1>
+
+            <div class="edu_split left">
+                <div class="school">
+                    
+                        <div class="school_header">
+                            <h2>University of Michigan</h2>
+                            <div class="school_info">
+                                <i>Ann Arbor, 2018-2021</i><br>
+                                <i>GPA: 3.6</i>
+                            </div>
+                        </div>
+                        <br>
+                        <p>I completed my bachelor's degree in computer science through the College of Engineering and graduated in December 2021. I was involved with <a class="text_link" href="#extracurriculars">Michigan Hackers</a> on the android development and cybersecurity team to improve my programming outside of class. In addition, I minored in music and was a member of the <a class="text_link" href="#extracurriculars">Michigan Marching Band</a>. The computer science upper-level electives I took include Computer Security, Web Systems, Operating Systems, and Software Engineering.</p>
+                    
+                </div>
+            </div>
+
+            <div class="edu_split right">
+                <!-- remember to add style="margin-top: 0;" to first one -->
+                
+                    <button class="collapsible_vert"  style="margin-top: 0;"  onclick="openProject(event, '2018-2019', 'collapsible_vert', 'school_dropdown')">2018-2019</button>
+                    <div class=" school_dropdown" id="2018-2019">
+                        <!-- remember to add style="margin-top: 0;" to first one -->
+                        
+                            <div class="subtitle"  style="margin-top: 0;" >Fall 2018</div>
+        
+                            <ul class="bullets">
+                                
+                                    <li>Self-Driving Cars, Drones, and Beyond: An Intro to Autonomous Electronic Systems (ENGR 100)</li>
+                                
+                                    <li>Differential Equations (Math 216)</li>
+                                
+                                    <li>General Physics I (PHYSICS 140)</li>
+                                
+                                    <li>Campus Band (ENS 346)</li>
+                                
+                                    <li>Marching Band (ENS 348)</li>
+                                
+                            </ul>
+                        
+                            <div class="subtitle" >Winter 2019</div>
+        
+                            <ul class="bullets">
+                                
+                                    <li>Introduction to Computer and Programming (ENGR 101)</li>
+                                
+                                    <li>General Chemistry (CHEM 130)</li>
+                                
+                                    <li>Discrete Mathematics (EECS 203)</li>
+                                
+                                    <li>The History of the Arab-Israeli Conflict (HISTORY 244)</li>
+                                
+                                    <li>Entrepreneurship Hour (ENTR 407)</li>
+                                
+                            </ul>
+                        
+                    </div>
+                
+                    <button class="collapsible_vert"  onclick="openProject(event, '2019-2020', 'collapsible_vert', 'school_dropdown')">2019-2020</button>
+                    <div class=" school_dropdown" id="2019-2020">
+                        <!-- remember to add style="margin-top: 0;" to first one -->
+                        
+                            <div class="subtitle"  style="margin-top: 0;" >Fall 2019</div>
+        
+                            <ul class="bullets">
+                                
+                                    <li>Programming and Intro Data Structures (EECS 280)</li>
+                                
+                                    <li>Entrepreneurship Hour (ENTR 407)</li>
+                                
+                                    <li>General Physics II (PHYSICS 240)</li>
+                                
+                                    <li>Introduction to Statistics and Data Analysis (STATS 250)</li>
+                                
+                                    <li>Marching Band (ENS 348)</li>
+                                
+                            </ul>
+                        
+                            <div class="subtitle" >Winter 2020 (Partially Virtual)</div>
+        
+                            <ul class="bullets">
+                                
+                                    <li>Data Structures and Algorithms (EECS 281)</li>
+                                
+                                    <li>Introduction to Computer Organization (EECS 370)</li>
+                                
+                                    <li>Technical Communications (TCHNCLCM 300)</li>
+                                
+                                    <li>History of Music (MUSICOL 346)</li>
+                                
+                                    <li>Campus Band (ENS 346)</li>
+                                
+                            </ul>
+                        
+                    </div>
+                
+                    <button class="collapsible_vert"  onclick="openProject(event, '2020-2021', 'collapsible_vert', 'school_dropdown')">2020-2021</button>
+                    <div class=" school_dropdown" id="2020-2021">
+                        <!-- remember to add style="margin-top: 0;" to first one -->
+                        
+                            <div class="subtitle"  style="margin-top: 0;" >Fall 2020 (Virtual)</div>
+        
+                            <ul class="bullets">
+                                
+                                    <li>Foundations of Computer Science (EECS 376)</li>
+                                
+                                    <li>Introduction to Computer Security (EECS 388)</li>
+                                
+                                    <li>Web Systems (EECS 485)</li>
+                                
+                                    <li>Linear Algebra (MATH 214)</li>
+                                
+                            </ul>
+                        
+                            <div class="subtitle" >Winter 2021 (Virtual)</div>
+        
+                            <ul class="bullets">
+                                
+                                    <li>Software Engineering (EECS 481)</li>
+                                
+                                    <li>Introduction to Operating Systems (EECS 482)</li>
+                                
+                                    <li>Introduction to Statistical Computing (STATS 306)</li>
+                                
+                                    <li>Contemporary Moral Problems (PHIL 355)</li>
+                                
+                            </ul>
+                        
+                    </div>
+                
+                    <button class="collapsible_vert"  onclick="openProject(event, '2021-Graduation', 'collapsible_vert', 'school_dropdown')">2021-Graduation</button>
+                    <div class=" school_dropdown" id="2021-Graduation">
+                        <!-- remember to add style="margin-top: 0;" to first one -->
+                        
+                            <div class="subtitle"  style="margin-top: 0;" >Fall 2021</div>
+        
+                            <ul class="bullets">
+                                
+                                    <li>Human-Centered Software and Design and Development (EECS 497)</li>
+                                
+                                    <li>Major Design Experience Professionalism (EECS 496)</li>
+                                
+                                    <li>Advanced Technical Communication for Computer Science (TCHNCLCM 497)</li>
+                                
+                                    <li>Intro to Music Theory (THEORY 137)</li>
+                                
+                                    <li>Naked Eye Astronomy (ASTRO 127)</li>
+                                
+                                    <li>Marching Band (ENS 348)</li>
+                                
+                                    <li>Campus Band (ENS 346)</li>
+                                
+                            </ul>
+                        
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <a name="experience"></a>
+    <div class="content">
+        <div class="experience">
+            <h1>Work Experience</h1>
+        </div>
+
+        
+            <div class="exp_section" style="margin-top: 0px;">
+                <div class="exp_heading">
+                    <h2>Amaon Robotics</h2>
+                    <h3>Software Developer Engineer</h3>
+                    <div class="time_range"><i>February 2022 - Present</i></div>
+                </div>
+                <div class="exp_body">
+                    <div class="exp_split left">
+                        
+                    </div>
+                    <div class="exp_split right">
+                        <img class="logo" src="resources/Amazon_Robotics_logo.png" alt="Amazon Robotics Logo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="line"></div>
+        
+            <div class="exp_section" >
+                <div class="exp_heading">
+                    <h2>IBM</h2>
+                    <h3>Extreme Blue Technical Intern</h3>
+                    <div class="time_range"><i>Austin, May 2021 - August 2021</i></div>
+                </div>
+                <div class="exp_body">
+                    <div class="exp_split left">
+                        I worked on a team of four interns to develop a web application to automate requesting, approving, creating, and cleaning SAN storage. Since the team consisted of only interns, I gained experience making code architecture decisions and deciding which customer deliverables needed prioritization. I led the efforts to build a Python API to interface with the switches and storage containers used for testing. In addition, I developed a large portion of the back-end Flask Rest API  and the MongoDB database used by the application. The application we created was estimated to increase testing efficiency by 24%, leading to an anticipated savings of $1.45 million in savings per year.
+                    </div>
+                    <div class="exp_split right">
+                        <img class="logo" src="resources/IBM_logo.png" alt="IBM Logo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="line"></div>
+        
+            <div class="exp_section" >
+                <div class="exp_heading">
+                    <h2>Ocient</h2>
+                    <h3>Software Engineer Intern</h3>
+                    <div class="time_range"><i>Chicago, May 2020 - August 2020</i></div>
+                </div>
+                <div class="exp_body">
+                    <div class="exp_split left">
+                        Throughout my internship, I worked on both the testing and query management team (cmdcomp). On the testing team, I added a code static analysis tool to run nightly on the codebase through the Gitlab CI/CD pipeline and provide a report in the morning of bugs/errors found. I also built a dashboard to generate graphs of the information created by the CI/CD pipelines focusing on average queue time, run time, and the number of pipelines in a given time. These projects will help ensure that bugs are caught early in the development process and help the testing team find holes in the testing infrastructure. On the cmdcomp team, I worked on adding compatibility for functions from SQL Server, PostgreSQL, and Oracle/PLSQL to allow Ocient&#39;s database to be compatible with many different querying languages. Working on this team gave me more exposure to the inner workings of the codebase and was great practice for writing production-ready code.
+                    </div>
+                    <div class="exp_split right">
+                        <img class="logo" src="resources/Ocient-logo.png" alt="Ocient Logo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="line"></div>
+        
+            <div class="exp_section" >
+                <div class="exp_heading">
+                    <h2>Ford Motor Company</h2>
+                    <h3>Autonomous Vehicle Software Intern</h3>
+                    <div class="time_range"><i>Palo Alto, May 2019 - August 2019</i></div>
+                </div>
+                <div class="exp_body">
+                    <div class="exp_split left">
+                        I worked side-by-side with full-time employees to develop automated driving and mapping software. This involved using the ROS2 framework to send custom messages between different modules in the project. In addition, I built an algorithm to calculate lane level localization and lane center offset of vehicles based on vehicle coordinates and lane polynomials in Python. Finally, I built a data pipeline to interpret lane level map information and provide it in the right format for driving policy training and implementation.
+                    </div>
+                    <div class="exp_split right">
+                        <img class="logo" src="resources/Ford_logo.png" alt="Ford Logo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="line"></div>
+        
+            <div class="exp_section" >
+                <div class="exp_heading">
+                    <h2>Ford Motor Company</h2>
+                    <h3>Transmission Modeling Intern</h3>
+                    <div class="time_range"><i>Dearborn, June 2017 - July 2017</i></div>
+                </div>
+                <div class="exp_body">
+                    <div class="exp_split left">
+                        I taught myself how to program in MATLAB and use Simulink modeling software with no prior experience. After learning the basics I then applied it in order to understand a model of an 8-speed transmission. I then made adjustments to the transmission model in order to get the results from the model to match real-world vehicle readings. Finally, I analyzed my changes and made recommendations on how the transmission model could be changed to be more accurate.
+                    </div>
+                    <div class="exp_split right">
+                        <img class="logo" src="resources/Ford_logo.png" alt="Ford Logo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="line"></div>
+        
+    </div>
+
+    <a name="projects"></a>
+    <div class="content" style="text-align: center;">
+        <div class="proj_header">
+            <h1>Projects</h1>
+            <br>
+        </div>
+
+        <div class="projects">
+            <div class="navbar" id="proj_bar">
+                
+                    <button class="collapsible_hor active" onclick="openProject(event, 'personal', 'collapsible_hor', 'proj_dropdown')">Personal Projects</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '100', 'collapsible_hor', 'proj_dropdown')">ENGR 100</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '280', 'collapsible_hor', 'proj_dropdown')">EECS 280</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '281', 'collapsible_hor', 'proj_dropdown')">EECS 281</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '370', 'collapsible_hor', 'proj_dropdown')">EECS 370</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '388', 'collapsible_hor', 'proj_dropdown')">EECS 388</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '482', 'collapsible_hor', 'proj_dropdown')">EECS 482</button>
+                
+                    <button class="collapsible_hor"  onclick="openProject(event, '485', 'collapsible_hor', 'proj_dropdown')">EECS 485</button>
+                
+            </div>
+
+            
+                <div class="proj_dropdown " id="personal" style="display: flex;">
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>This Website (Javascript, Python)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>I created this website as a personal project over the winter break of my sophomore year (2020). I taught myself the basics of HTML, CSS, and JavaScript to bring this together on my own time. I have since changed to be generated using python and Jinja. Feel free to contact me with any feedback.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/Home_picture.PNG" alt="Website Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Drone Light Show Animation (Processing)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>I created this simulation during the 2017 HiMCM competition. A series of drone positions were preprogrammed to create shapes. Then each drone would pick a location and travel to it. Different algorithms were used for telling drones how to choose their next position and we went with the one that was the most efficient.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/drone_animation.png" alt="Drone Simulation Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="100" >
+                    
+                        <h2 class="class_name">An Intro to Autonomous Electronic Systems</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Autonomous Drone Navigation (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The main project for my ENGR 100 class which consisted of making a drone navigate through a short obstacle course autonomously. The drone used one ultrasonic and four lidar sensors. The drone came with basic obstacle avoidance which would avoid objects when it got close to them. To complete the course I added filters to the sensor signals, a PID controller to the controls, and a vehicle navigation algorithm.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/drone_pic.JPG" alt="Drone Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="280" >
+                    
+                        <h2 class="class_name">Programming and Intro Data Structures</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Statistics Calculator (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project would take in a file of data values as input. Then the user would specify what part of the document they want the statistics calculated for. Finally, the program would calculate and print the statistics such as mean, median, mode, standard deviation, and quartiles.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/statistics_picture.png" alt="Statistics Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Image Resizing (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The purpose of this project was to resize an inputted image to specified dimensions using a technique called seam carving. Seam carving works by finding and removing “seams” in the image that pass through the least important pixels. After having reduced the image to the right dimensions, the program would save the resized versions to a new file with the dimensions in the file name.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/seam_carving_picture.png" alt="Seam Carving Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Euchre Simulator (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project consisted of simulating a game of euchre with both computer players and human players. This included, deck shuffling, dealing, playing tricks, scoring, and the computer&#39;s strategy. Computer players used a simple strategy that didn&#39;t take into account other players&#39; cards, only taking into account the suit that was led. Human players were informed of the board state and asked for input for every decision.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/euchre_picture.jpg" alt="Euchre Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>HTTP Requests (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>For this project, a file containing a specific HTTP request is read into the program. Then the program interprets the request and performs the necessary action. This project focused on adding people to a queue. GET, POST, and DELETE requests were used to change the queue and see who was currently waiting.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/http-requests.png" alt="HTTP Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Post Classification (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project used machine learning methods to classify the topic questions posted in an online forum. The classification method used was a simpler version of the &#34;Multi-Variate Bernoulli Naive Bayes Classifier&#34;. The classifier was trained using already classified posts and then was used to determine the most likely topic for unclassified posts.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/post_classification.png" alt="Speech Classification Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="281" >
+                    
+                        <h2 class="class_name">Data Structures and Algorithms</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Puzzle Solver (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project is a puzzle solver in which a map is read in from a file and the program attempts to determine the moves to solve it or classify it as unsolvable. The map contains the starting position, goal, open space, walls, buttons, doors, and traps. Buttons are used to unlock their corresponding door, and traps close all doors. The solver works by making a list of all possible moves and linking them together until one gets to the goal.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/maze_picture.jpg" alt="Maze Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Stocks on Stocks on Stocks (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I built a simulation of a stock market, with buyers and sellers posting orders into the market and automatically being paired when there is a match. In this simulation, orders were constrained to limit orders, and orders with earlier timestamps were selected in case of a tie. Orders were read using the command line and consisted of timestamp, trader id, stock id, buy/sell intent, price limit, and quantity.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/Stocks-Up.jpg" alt="Stock Market Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>SillyQL (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I built a database that could receive queries from the user, and successfully execute them in the database. This database supported the commands: CREATE, INSERT INTO, DELETE FROM, GENERATE INDEX, PRINT, JOIN, REMOVE, and QUIT. The program would parse valid commands from the command line, do the corresponding operation on the database before printing out a descriptive message of its actions back to the command line.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/SQL-database.jpg" alt="SQL Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Drone Delivery (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project was based around creating a company that handled on-campus delivery at universities using drones and is similar to the traveling salesman problem. First, coordinates are read in that specify the locations where drones can pick-up and drop-off packages. Then the program figures out the fastest way to visit every location on campus once and then returning to its starting location. To solve this problem, I first generated a starting path with a Nearest Insertion algorithm. Then to get closer to the best solution, I used a branch-and-bound recursive algorithm that used Prim&#39;s algorithms to determine if a branch was promising.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/Drone_delivery.jpeg" alt="Drone Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="370" >
+                    
+                        <h2 class="class_name">Introduction to Computer Organization</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>LC-2K Assembler and Simulator (C)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The project was split into three separate parts. First I built a single cycle assembler to convert LC-2K assembly code to machine code. Next, I created a program that could simulate any valid LC-2K machine code program. Finally, I wrote a program in assembly that could multiply two numbers together and used the program in conjunction with the simulator.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/code_hierarchy_picture.jpg" alt="Code Hierarchy Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>LC-2K Assembler and Linker (C)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The assembler part of this project builds on the one I made in project 1. I mainly added compatibility for the assembler to work with global variables and got it to output an object file that could be used by the linker in the next part of the project. Once finished I then built a linker that could combine multiple object files into an executable machine code file. Finally, I wrote an assembly function that calculated combinations using recursion which was compiled with my assembler and linker to be joined with a main file to be executed.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/linker.png" alt="Linker Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>LC-2K Pipeline Assembler (C)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project focused on modifying project 1&#39;s assembler to work as a pipeline instead of a single cycle assembler. My implementation used a class of pipeline registers that kept track of information in each stage of the pipeline between cycles. To handle data hazards, I implemented internal forwarding and, to handle control hazards used a detect-and-stall method.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/pipeline.jpg" alt="Pipeline Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Cache Simulator (C)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I added onto my simulator created in project 1 to implement a cache that is used whenever there is a read or write to memory. The caches block size, the number of sets, and blocks per set where specified in the command line arguments for each run of the program. This means the simulator needs to be made in such a way that it would work with any of a fully associative cache, a direct-mapping cache, or a set-associative cache.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/caching.png" alt="Caching Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="388" >
+                    
+                        <h2 class="class_name">Introduction to Computer Security</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Vulnerable Applications of Cryptography (Python)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I performed multiple different attacks inspired by problems found in many real-world implementations such as Length Extension, Hashing Collisions, Frequency Analysis, RSA Signature Forgery, and Padding Oracle Attacks. The most interesting and complex problem was writing the program to execute the Padding Oracle Attack. I was given an encrypted message along with a URL that took an encrypted message and returned it if the message was valid or specified which error occurred (invalid mac or invalid padding). Using the information from the URL&#39;s responses, I built a program to decode the encrypted message bit by bit, using a padding oracle attack.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/hash_collision.png" alt="Hash Collision Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Attacking Insecure Website (Python)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project focused on exploiting common types of vulnerabilities in insecure websites, specifically SQL injection, cross-site scripting (XSS), and cross-site request forgery (CSRF). Each attack had multiple levels of defense that needed to be broken, with each level increasing in difficulty and requiring a different approach. The website provided for the project included a login field, along with a search bar to search a database and a history bar of recent searches. The SQL injection was performed on the login part of the site and had defenses that included escaping quotes in the user input and applying a hash function to the password field. The XSS attack was executed in the search bar, and its defenses included removing the word script, common HTML tags, and some types of punctuation. The CSRF attack involved building a URL that would log the current user into an attacker&#39;s account on the insecure website when visited.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/sql-injection-attack.jpg" alt="SQL Injection Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Analyzing and Attacking Networks (Golang)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project focused on the vulnerabilities of network communication and had three parts. The first part consisted of analyzing network traffic data in Wireshark to determine what type of devices were communicating on the network. Part two involved writing a program in Go to read network traffic data to search for IP and MAC addresses exhibiting sketchy behavior. Such behavior included sending many more SYN packets than SYN+ACK packets or sending many unsolicited ARP replies. Part three of the project was to write a program to execute a man in the middle attack in GO. This included intercepting and spoofing DNS requests to a bank server from the client towards my IP. I also acted as an HTTP proxy, relaying the client&#39;s request to the bank&#39;s server and sending responses back. The twist in the project was to intercept all credentials/cookies sent by the client, in addition to changing any money transfer request to be sent to my bank account without alerting the client.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/mitm_attack.jpg" alt="Man in the Middle Attack Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Control-flow Hijacking (Python)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I performed buffer-overflow attacks on seven vulnerable C programs. Each program required various techniques to cause the overflow, with each one increasing in difficulty. For the more advanced overflows, I had to open a bash shell as admin. Some of the defenses used by the programs include Data Execution Prevention (DEP), Address Space Layout Randomization (ASLR), and stack canaries. Some techniques I used to overcome these defenses include NOP sleds, return-to-libc, and return-oriented programming.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/buffer_overflow.png" alt="Buffer Overflow Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Digital Forensics Analysis (Python)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>The final and most enjoyable project in this course involved using digital forensics to look into an individual&#39;s hard drive and related websites to writing a report about whether the suspect committed a crime. To complete the project, I was responsible for finding tokens (ex. #token-ThisIsAToken) hidden in the hard drive and websites. To accomplish this task, I had to use many of the cryptographic skills I learned about in the course, include steganography, ciphers, buffer-overflow, cross-site scripting, brute force password hacking, and an understanding of the Linux environment. The most interesting part of the project involved signing a secret message with the private key found on the hard drive and sending it as a query to a server. Also, the user agent of the request had to be found in a steganographic image inside the hard drive. Solving this puzzle gave me the URL of a secret messaging board on Tor that the suspected criminal was known to use. Getting to this messaging board provided the necessary information to explain in my report which crimes the suspect had committed.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/digital_forensics.jpg" alt="Digital Forensics Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="482" >
+                    
+                        <h2 class="class_name">Introduction to Operating Systems (C++)</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Disk Scheduler (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I wrote a concurrent program that issues and services disk requests to teach the basics of threading. On startup, the program creates a specified number of requester threads to issue requests and one thread to service requests. While running, the servicer thread handles requests in shortest seek time first (SSTF) order. Additionally, it will only serve requests when its request queue is filled to maximize the number of requests it can choose.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/Disk_Scheduler.jpg" alt="Disk Scheduler Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Thread Library (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I built a thread library which that was able to create threads, cvs, and mutexes. Threads had a yield function that allowed them to voluntarily give up the CPU to the next runnable thread. I used the Linux ucontext.h library in this project to handle context switching (getcontext, makecontext, setcontext, swapcontext). Overall, this project gave me a much better understanding of how threads work and how to use them efficiently.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/multithreading.jpeg" alt="Multithreading Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Memory Manager (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I designed and implemented a pager (the part of the kernel that handles virtual address spaces). My pager provided allowed processes to read and write data to swap files and/or regular files. Data stored in swap files are private to processes and are freed when the process exits. Data in regular files could be accessed simultaneously by processes and lived beyond the lifetime of any given process. Programs used the pager by making calls to vm_map(filename, block), which returned a pointer to the correct memory location.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/memory_allocation.png" alt="Memory Managment Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Network File Server (C++)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I implemented a multi-threaded network file server. This was my first time writing a substantial multi-threaded program. While processing requests, the file server used handed-over-hand locking to prevent race conditions when reading and writing to files. Overall, I gained a better understanding of hierarchical file systems, socket programming, client-server systems, and network protocols.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/file_server.jpg" alt="File Server Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+                <div class="proj_dropdown " id="485" >
+                    
+                        <h2 class="class_name">Web Systems</h2>
+                    
+                    
+                        <div class="proj_body" style="margin-top: 0px;">
+                            <div class="proj_name">
+                                <h2>Templated Static Site Generator (Python, HTML)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project consisted of creating an Instagram clone with a templated static site generator. I learned how to use HTML, CSS, templates, Python, and basic shell scripts. The first part of the project involved making the HTML templates using the jinja framework. The next step was to add CSS and generate the JSON data for the templates. Finally, I used Python to retrieve data from the JSON files to populate the templates and generate the HTML to send to the client. Throughout this and future projects, shell scripts were used to compile and run all the necessary files to host the site locally.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/static_site_generator.png" alt="Static Site Generator Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Server-side Dynamic Pages (PYthon, HTML)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This project transitions the static site generator into a server-side, dynamic version of the Instagram clone. It reused the templates from the previous project and rendered them on demand when a user loads a page. New features include creating, updating, and deleting users, posts, comments, and likes. The most significant change was the introduction of Flask to handle all the server-side functionality. Flask also helped implement sessions to handle account login and connecting to an SQLite database to read/store user information.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/server_side.png" alt="Server-Side Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Client-side Dynamic Pages (Python, HTML, Javascript)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>This final version of the Instagram clone implements it as a client-side dynamic page. Although many parts of the server-side version were able to be reused, a REST API and Javascript were added to handle the client-side components. When anything needed to be modified on the site, the client-side Javascript would make a call to the REST API to update the server-side database, in addition to updating the DOM. By converting the site to be client-side, I was able to implement double click to like, infinite scroll, and allow content to update without refreshing. </p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/client_side.jpg" alt="Client-Side Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Map Reduce (Python)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I implemented a map-reduce server using python. It was a single machine, multi-process, multi-threaded server that executed user-submitted MapReduce jobs. The project was split up into a Master and Workers. Each worker would receive an executable to run, input directory, and output directory from the master. After completing its task, it would send a message to the master letting it know it was available for more tasks. Also, workers continually sent heartbeat messages to the master so it would know which workers were still online. The master handled all heartbeat messages using a UDP thread and all other messages using a TCP thread. Finally, the master was responsible for reassigning jobs to other workers from workers who had failed.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/mapreduce.jpg" alt="MapReduce Picture">
+                            </div>
+                        </div>
+                    
+                        <div class="proj_body" >
+                            <div class="proj_name">
+                                <h2>Wikipedia Search Engine (Python, HTML, Javascript)</h2>
+                            </div>
+        
+                            <div class="proj_split  left">
+                                <p>In this project, I built a scalable search engine similar in design to a commercial search engine. This search engine implements reverse indexing using MapReduce and PageRank using tf-idf. To create the inverted index table, a MapReduce program was used containing multiple reduction functions. The next step was building a REST API to act as an index server. The server would load the inverted index (calculated beforehand) and PageRank (provided) into memory on startup. Then, whenever the server received a query request, it would calculate the weight score for every document relevant to the query and return them in sorted order. The final part of the project was to create a search interface to act as the front end. The search interface was a server-side dynamic page, sending queries to the index server and using the response to update the page.</p>
+                            </div>
+                            <div class="proj_split right">
+                                <img class="proj_pictures" src="resources/wiki-search-engine.jpg" alt="Wikipedia Search Picture">
+                            </div>
+                        </div>
+                    
+                </div>
+            
+        </div>
+    </div>
+
+    <a name="extracurriculars"></a>
+    <div class="content" style="margin-bottom: 20px;">
+        <div class="extracurriculars ">
+            <h1>Extracurriculars</h1>
+        </div>
+        
+        <div class="exp_section" style="margin-top: 0px;">
+            <div class="exp_heading">
+                <h2>Michigan Marching Band</h2>
+                <div class="time_range"><i>Fall 2018 - Fall 2021</i></div>
+            </div>
+            <div class="exp_body">
+                <div class="exp_split left">
+                    I have played clarinet in marching band since my freshman year of high school. Marching band has shaped many aspects of my life over the years. Many of my friends are in the band and marching band has enhanced my love for listening to and making music. Marching band has also helped me off the field. I find that I have better spatial awareness and work better with other people since I started marching. This is by far the extracurricular activity into which I put the most time and effort.
+                </div>
+                <div class="exp_split right">
+                    <img class="logo" src="resources/marching_band.jpg" alt="Marching Band Picture">
+                </div>
+            </div>
+        </div>
+        
+        <div class="exp_section" >
+            <div class="exp_heading">
+                <h2>Michigan Hackers</h2>
+                <div class="time_range"><i>Winter 2019 - Fall 2021</i></div>
+            </div>
+            <div class="exp_body">
+                <div class="exp_split left">
+                    I joined Michigan Hackers during the Winter of my Freshman year. I joined the android development team which had started developing a game called Photo Assassin. The game is meant to be played by large groups of people. Each person will be given another player as their target, who they then have to try and take a picture of without being noticed. The part of the app I worked on was the camera interface. I have since transitioned to being part of the cyber security team to learn more about the field and about competing in hackathons.
+                </div>
+                <div class="exp_split right">
+                    <img class="logo" src="resources/michigan-hackers.png" alt="Michigan Hackers Picture">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+
+</html>
