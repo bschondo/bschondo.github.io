@@ -3,7 +3,6 @@
 set -Eeuo pipefail
 
 function cleanup {
-  echo "Unstaging changes"
   git restore --staged .
 }
 

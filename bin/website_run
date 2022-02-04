@@ -13,5 +13,5 @@ if [ -z ${1+x} ]; then
     cd website/html
     python3 -m http.server 8000
 else
-    echo "build only"
+    echo "Rebuild site"
 fi
