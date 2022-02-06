@@ -3,7 +3,7 @@
 set -Eeuo pipefail
 
 # Clean
-rm -rf website/html
+rm -rf website/html/
 
 # Build
 website_generator website
