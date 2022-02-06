@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -Eeuo pipefail
+
+function cleanup {
+  git restore --staged .
+}
+trap cleanup EXIT
+
+git status
+
+echo "Ready to commit? (y/n)"
+read answer
+
+if [ "$answer" = "y" ]; then
+    echo "Write commit message."
+    read commit_message
+    git add --all
+    git commit -m "$commit_message"
+
+    git push origin main
+    
+    ./bin/deploy_site build
+fi

@@ -3,10 +3,12 @@
 set -Eeuo pipefail
 
 # Clean
-rm -rf website/html/
+cd _site
+rm -rf !\(.git\)
+cd ..
 
 # Build
-website_generator website
+website_generator website --output _site
 
 if [ -z ${1+x} ]; then 
     # Serve

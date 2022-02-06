@@ -26,7 +26,7 @@ def main(input_dir, output, verbose):
     try:
         static_dir = input_dir/'static'
         if static_dir.is_dir():
-            shutil.copytree(static_dir, output_dir)
+            shutil.copytree(static_dir, output_dir,  dirs_exist_ok=True)
             if verbose:
                 print('Copied ' + str(static_dir) +
                       '/ -> ' + str(output_dir) + '/')
