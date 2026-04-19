@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "d3-delaunay": "^6.0.4",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^1.8.0",
+    "react-markdown": "^10.1.0"
+  }
+}
