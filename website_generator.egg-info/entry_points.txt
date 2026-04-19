@@ -1,3 +1,0 @@
-[console_scripts]
-website_generator = website_generator.__main__:main
-
