@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-brand-bg: #0F172A;
+  --color-brand-text: #F8FAFC;
+  --color-brand-primary: #EAB308;
+  --color-brand-secondary: #334155;
+  --color-brand-accent: #6366F1;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+    scrollbar-gutter: stable;
+  }
+  body {
+    @apply bg-brand-bg text-brand-text font-sans selection:bg-brand-primary selection:text-brand-bg;
+  }
+}
+
+.markdown-body {
+  @apply prose prose-invert max-w-none;
+  @apply text-brand-text/80;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  @apply text-brand-text font-bold tracking-tight mb-4 mt-8;
+}
+
+.markdown-body p {
+  @apply mb-4 leading-relaxed;
+}
+
+.markdown-body ul {
+  @apply list-disc list-inside mb-4 space-y-2;
+}
+
+.markdown-body code {
+  @apply bg-brand-secondary/50 px-1.5 py-0.5 rounded text-brand-primary font-mono text-sm;
+}
