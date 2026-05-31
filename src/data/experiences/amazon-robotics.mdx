@@ -1,25 +1,20 @@
 import PathPlanner from '../../components/interactive/PathPlanner';
 
-# Software Developer @ Amazon Robotics
+## Scope
 
-## The Mission
+Amazon Robotics operates two distinct fleet architectures. Structured floor robots follow predetermined paths on fixed grids — the classic drive-unit-under-pod model that powers the majority of fulfillment volume. Autonomous floor robots navigate freely through open warehouse space shared with human workers, requiring computed paths rather than predefined routes. My work focuses on the autonomous floor navigation stack: generating collision-free paths with waypoints and execution envelopes, enforcing traffic policies to manage congestion, and estimating travel times used by downstream systems for task allocation and scheduling. Earlier work also touched structured floor systems through shared data infrastructure that serves both fleet types.
 
-Orchestrating the movement of thousands of autonomous mobile robots (AMRs) requires not just speed, but absolute reliability. As part of the **Path Planning Team**, I focused on the core algorithms that allow our robots to navigate complex, dense warehouse environments safely.
+## Scale
 
-## Solving for Scale
+The autonomous floor grew from 10 sites and 420 robots to over 36 sites and 4,700 robots in the past year. Path planning requests scaled from 90,000 to 900,000 per day over the same period. Supporting data pipelines ingest over 455 million path records daily across both fleet types, serving 9 downstream consumers with sub-500ms data freshness. These robots operate in the same physical space as human workers, so correctness and safety are non-negotiable. Floor layouts are no static — temporary restricted zones, shifting storage configurations, and varying robot load states all require the navigation stack to adapt continuously without manual intervention.
 
-The primary challenge at Amazon isn't finding a path for one robot—it's finding paths for 5,000 robots simultaneously while avoiding collisions and deadlocks.
-
-*   Optimized A* search variants for grid-based warehouse maps.
-*   Implemented real-time obstacle avoidance using dynamic window approaches.
-*   Developed visualization tools for debugging multi-agent coordination.
-
-## Interactive Sandbox: Path Planner
-
-Below is a simplified visualization of the navigation mesh generation process. We use geometric decomposition to turn a continuous floor space into a searchable graph of connected regions.
-
-<PathPlanner />
 
 ## Technical Depth
 
-Working at Amazon Robotics taught me the importance of performance-critical C++ and Java, and how to bridge the gap between high-level path-finding theory and the messy reality of physical sensors and motor controllers.
+The work spans computational geometry, graph algorithms, and distributed systems. Physical warehouse maps get decomposed into navigable spatial representations — triangulated meshes, distance fields for clearance enforcement, and sparse graphs for efficient travel time estimation. Search algorithms produce optimal paths under real-time latency constraints while respecting clearance requirements, traffic policies, and dynamic obstacles. Travel time estimation operates on precomputed graph structures to deliver sub-second responses where previous approaches took minutes. The interactive demo below is a simplified illustration of this pipeline — triangulating free space around obstacles and searching for the shortest path through the resulting mesh.
+
+## Interactive Path Planner
+
+Below is a simplified demo of the path planning generation process. We use geometric decomposition to turn a continuous floor space into a searchable graph of connected regions. An A* search is performed on the graph to optimize for travel time where the estimated speed scales with how close the segment is to any obstacle.
+
+<PathPlanner />

@@ -27,7 +27,7 @@ export default function ExperienceDetail({ experience, onClose }: ExperienceDeta
       {/* Content Container */}
       <motion.div
         layoutId={`card-${experience.id}`}
-        className="relative w-full max-w-4xl max-h-[90vh] bg-brand-bg border border-brand-secondary rounded-3xl overflow-hidden shadow-2xl shadow-brand-bg/50 flex flex-col"
+        className="relative w-full max-w-6xl max-h-[90vh] bg-brand-bg border border-brand-secondary rounded-3xl overflow-hidden shadow-2xl shadow-brand-bg/50 flex flex-col"
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
         {/* Header */}
@@ -39,7 +39,7 @@ export default function ExperienceDetail({ experience, onClose }: ExperienceDeta
             <X size={20} />
           </button>
 
-          <div className="w-full md:w-48 h-48 rounded-2xl overflow-hidden border border-brand-secondary">
+          <div className="w-full md:w-72 h-72 rounded-3xl overflow-hidden border border-brand-secondary">
             <motion.img 
               layout
               layoutId={`image-${experience.id}`}

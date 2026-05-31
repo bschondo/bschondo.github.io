@@ -10,10 +10,22 @@ export interface Experience {
 }
 
 export interface Education {
+  id: string;
   school: string;
   degree: string;
   timeframe: string;
   image: string;
+  location?: string;
+  tags?: string[];
+  gpa?: string;
+  summary?: string;
+  classInfo?: {
+    timeRange: string;
+    semesters: {
+      name: string;
+      classes: string[];
+    }[];
+  }[];
 }
 
 export interface SkillGroup {

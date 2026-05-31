@@ -1,23 +1,26 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { User, Briefcase, GraduationCap, Code2, Github, Linkedin, Mail, FileText } from 'lucide-react';
-import { Experience } from './types';
-import { EXPERIENCES, EDUCATION, SKILL_GROUPS } from './constants';
+import { Dices, Briefcase, GraduationCap, Code2, Github, Linkedin, Mail, FileText } from 'lucide-react';
+import { Experience, Education } from './types';
+import { EXPERIENCES, EDUCATION, SKILL_GROUPS, INTERESTS } from './constants';
 import ExperienceCard from './components/ExperienceCard';
 import ExperienceDetail from './components/ExperienceDetail';
+import EducationCard from './components/EducationCard';
+import EducationDetail from './components/EducationDetail';
 
 export default function App() {
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
+  const [selectedEducation, setSelectedEducation] = useState<Education | null>(null);
   const [showResume, setShowResume] = useState(false);
 
   // Prevent body scroll when Focus Mode is active
   useEffect(() => {
-    if (selectedExperience) {
+    if (selectedExperience || selectedEducation) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [selectedExperience]);
+  }, [selectedExperience, selectedEducation]);
 
   return (
     <div className="min-h-screen selection:bg-brand-primary selection:text-brand-bg">
@@ -38,28 +41,26 @@ export default function App() {
 
       <main className="max-w-6xl mx-auto px-6 pt-32 pb-32">
         {/* ... Hero Section ... */}
-        <section id="about" className="mb-32 scroll-mt-32">
+        <section id="about" className="mb-8 scroll-mt-32">
           {/* Hero content remains same */}
           <div className="flex flex-col md:flex-row gap-12 items-center md:items-start text-center md:text-left">
             <div className="relative group">
               <div className="absolute -inset-1 bg-brand-primary/20 rounded-3xl blur-xl group-hover:bg-brand-primary/30 transition-all duration-500 opacity-70" />
-              <img 
-                src="https://picsum.photos/seed/ben/400/400"
-                alt="Ben Schondorf"
+              <img
+                src="resources/header.jpg"
+                alt="Heading Image"
                 className="relative w-48 h-48 md:w-64 md:h-64 object-cover rounded-3xl border-2 border-brand-secondary"
                 referrerPolicy="no-referrer"
               />
             </div>
             <div className="flex-1">
-              <span className="inline-block px-3 py-1 bg-brand-primary/10 text-brand-primary text-sm font-bold rounded-full mb-6">
+              {/* <span className="inline-block px-3 py-1 bg-brand-primary/10 text-brand-primary text-sm font-bold rounded-full mb-6">
                 Available for new collaborations
-              </span>
+              </span> */}
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-brand-text mb-6">
-                Building autonomous systems for <span className="text-brand-primary italic">reliability</span> and <span className="text-brand-accent">scalability</span>
+                Building software systems for <span className="text-brand-primary italic">reliability</span> and <span className="text-brand-accent">scalability</span>
               </h1>
-              <p className="text-xl text-brand-text/60 max-w-2xl leading-relaxed mb-8">
-                I'm a Frontend Architect specialized in building immersive, high-performance web applications. My work focuses on the intersection of systematic design and kinetic user experiences.
-              </p>
+              {/* <p className="text-xl text-brand-text/60 max-w-2xl leading-relaxed mb-8"></p> */}
               
               <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-8">
                 <button 
@@ -120,7 +121,7 @@ export default function App() {
         </section>
 
         {/* Experience Grid */}
-        <section id="experience" className="mb-32 scroll-mt-24">
+        <section id="experience" className="mb-24 scroll-mt-24">
           <div className="flex items-center gap-4 mb-12">
             <div className="p-2 bg-brand-primary/10 text-brand-primary rounded-lg">
               <Briefcase size={24} />
@@ -141,7 +142,7 @@ export default function App() {
         </section>
 
         {/* Education */}
-        <section id="education" className="mb-32 scroll-mt-24">
+        <section id="education" className="mb-24 scroll-mt-24">
           <div className="flex items-center gap-4 mb-12">
             <div className="p-2 bg-brand-accent/10 text-brand-accent rounded-lg">
               <GraduationCap size={24} />
@@ -149,38 +150,55 @@ export default function App() {
             <h2 className="text-3xl font-bold text-brand-text">Education</h2>
             <div className="flex-1 h-px bg-brand-secondary/50 ml-4" />
           </div>
-          <div className="grid gap-6 md:grid-cols-2 max-w-6xl">
-            {EDUCATION.map((edu, index) => (
-              <div key={index} className="group bg-brand-secondary/10 border border-brand-secondary/30 rounded-2xl overflow-hidden flex flex-col sm:flex-row">
-                <div className="w-full sm:w-32 h-32 sm:h-auto overflow-hidden">
-                  <img 
-                    src={edu.image} 
-                    alt={edu.school} 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                <div className="flex-1 p-6 relative">
-                  <h3 className="text-xl font-bold text-brand-text group-hover:text-brand-accent transition-colors">{edu.school}</h3>
-                  <p className="text-brand-text/60 mb-2">{edu.degree}</p>
-                  <p className="text-xs font-mono text-brand-text/30">{edu.timeframe}</p>
+          <div className="flex flex-col gap-8 max-w-6xl">
+            {EDUCATION.map((edu) => (
+              <EducationCard key={edu.id} education={edu} onSelect={setSelectedEducation} />
+            ))}
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section id="skills" className="mb-24 scroll-mt-24">
+          <div className="flex items-center gap-4 mb-12">
+            <div className="p-2 bg-brand-primary/10 text-brand-primary rounded-lg">
+              <Code2 size={24} />
+            </div>
+            <h2 className="text-3xl font-bold text-brand-text">Skills</h2>
+            <div className="flex-1 h-px bg-brand-secondary/50 ml-4" />
+          </div>
+          <div className="grid md:grid-cols-2 gap-12">
+            {SKILL_GROUPS.map((group, index) => (
+              <div key={index} className="p-8 bg-brand-secondary/10 border border-brand-secondary/30 rounded-2xl">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-brand-primary mb-6 font-mono">
+                  {group.category}
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {group.skills.map(skill => (
+                    <span 
+                      key={skill}
+                      className="px-4 py-2 bg-brand-secondary/20 border border-brand-secondary/50 text-brand-text/70 text-sm font-medium rounded-xl hover:border-brand-primary/40 transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Skills */}
-        <section id="skills" className="scroll-mt-24">
+        {/* Interests */}
+        <section id="interests" className="mb-24 scroll-mt-24">
           <div className="flex items-center gap-4 mb-12">
-            <div className="p-2 bg-brand-primary/10 text-brand-primary rounded-lg">
-              <Code2 size={24} />
+            <div className="p-2 bg-brand-primary/10 text-brand-accent rounded-lg">
+              <Dices size={24} />
             </div>
-            <h2 className="text-3xl font-bold text-brand-text">Technical Skills</h2>
+            <h2 className="text-3xl font-bold text-brand-text">Interests</h2>
             <div className="flex-1 h-px bg-brand-secondary/50 ml-4" />
           </div>
+
           <div className="grid md:grid-cols-2 gap-12">
-            {SKILL_GROUPS.map((group, index) => (
+            {INTERESTS.map((group, index) => (
               <div key={index} className="p-8 bg-brand-secondary/10 border border-brand-secondary/30 rounded-2xl">
                 <h3 className="text-sm font-bold uppercase tracking-widest text-brand-primary mb-6 font-mono">
                   {group.category}
@@ -207,6 +225,12 @@ export default function App() {
           <ExperienceDetail 
             experience={selectedExperience} 
             onClose={() => setSelectedExperience(null)} 
+          />
+        )}
+        {selectedEducation && (
+          <EducationDetail 
+            education={selectedEducation}
+            onClose={() => setSelectedEducation(null)}
           />
         )}
       </AnimatePresence>
