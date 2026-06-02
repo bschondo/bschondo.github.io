@@ -1,4 +1,4 @@
-import PathPlanner from '../../components/interactive/PathPlanner';
+import PathPlanner from '../../components/interactive/amazon/InteractiveAmazonApp';
 
 ## Scope
 
@@ -17,4 +17,4 @@ The work spans computational geometry, graph algorithms, and distributed systems
 
 Below is a simplified demo of the path planning generation process. We use geometric decomposition to turn a continuous floor space into a searchable graph of connected regions. An A* search is performed on the graph to optimize for travel time where the estimated speed scales with how close the segment is to any obstacle.
 
-<PathPlanner />
+<InteractiveAmazonApp />
