@@ -10,7 +10,7 @@ export const EXPERIENCES: Experience[] = [
     timeframe: '2022 - Present',
     description: 'Building scalable path planning and navigation systems for autonomous robots operating alongside human workers in Amazon fulfillment centers.',
     tags: ['Robotics', 'Path Planning', 'AWS', 'Java', 'Typescript'],
-    image: 'resources/AmazonRobotics.jpg',
+    image: './resources/AmazonRobotics.jpg',
     content: AmazonRoboticsMDX
   }
 ];
@@ -24,7 +24,7 @@ export const EDUCATION: Education[] = [
     location: 'Ann Arbor, MI',
     tags: ['Marching Band', 'Michigan Hackers', 'Engineering'],
     gpa: '3.6', 
-    image: 'resources/UMichBigHouse.jpg',
+    image: './resources/UMichBigHouse.jpg',
     summary: 'I completed my bachelor\'s degree in computer science through the College of Engineering and graduated in December 2021. I was involved with <a class="text_link" href="https://michhackers.com/">Michigan Hackers</a> on the android development and cybersecurity team to improve my programming outside of class. In addition, I minored in music and was a member of the <a class="text_link" href="https://michiganmarchingband.com/">Michigan Marching Band</a>. The computer science upper-level electives I took include Computer Security, Web Systems, Operating Systems, and Software Engineering.',
     classInfo: [
       {

@@ -25,7 +25,7 @@ export default function App() {
   // Preload PDF on component mount
   useEffect(() => {
     const iframe = document.createElement('iframe');
-    iframe.src = 'resources/BenSchondorfResume2026.pdf';
+    iframe.src = './resources/BenSchondorfResume2026.pdf';
     iframe.style.display = 'none';
     document.body.appendChild(iframe);
     return () => {
@@ -58,7 +58,7 @@ export default function App() {
             <div className="relative group">
               <div className="absolute -inset-1 bg-brand-primary/20 rounded-3xl blur-xl group-hover:bg-brand-primary/30 transition-all duration-500 opacity-70" />
               <img
-                src="resources/headshot.jpeg"
+                src="./resources/headshot.jpeg"
                 alt="Heading Image"
                 className="relative w-48 h-48 md:w-64 md:h-64 object-cover rounded-3xl border-2 border-brand-secondary"
                 referrerPolicy="no-referrer"
@@ -110,7 +110,7 @@ export default function App() {
                     <div className="p-4 bg-brand-secondary/20 flex justify-between items-center border-b border-brand-secondary">
                       <span className="text-xs font-mono text-brand-text/40">BenSchondorfResume2026.PDF</span>
                       <a 
-                        href="resources/BenSchondorfResume2026.pdf" 
+                        href="./resources/BenSchondorfResume2026.pdf"  
                         download 
                         className="text-[10px] font-bold uppercase tracking-widest text-brand-primary hover:underline"
                       >
@@ -119,7 +119,7 @@ export default function App() {
                     </div>
                     <div className="aspect-[1/1.41] w-full">
                       <iframe 
-                        src="resources/BenSchondorfResume2026.pdf#toolbar=0&navpanes=0&scrollbar=1" 
+                        src="./resources/BenSchondorfResume2026.pdf#toolbar=0&navpanes=0&scrollbar=1"
                         className="w-full h-full"
                         title="Ben Schondorf Resume"
                       />
