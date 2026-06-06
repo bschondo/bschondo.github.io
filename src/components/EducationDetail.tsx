@@ -28,68 +28,12 @@ export default function EducationDetail({ education, onClose }: EducationDetailP
         className="relative w-full max-w-6xl max-h-[90vh] bg-brand-bg border border-brand-secondary rounded-3xl overflow-hidden shadow-2xl shadow-brand-bg/50 flex flex-col"
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
-        <div className="relative p-6 md:p-10 border-b border-brand-secondary bg-brand-bg/50 backdrop-blur-sm z-10 flex flex-col md:flex-row gap-8">
-          <button
-            onClick={onClose}
-            className="absolute top-6 right-6 p-2 rounded-full bg-brand-bg/40 hover:bg-brand-secondary/50 transition-colors text-brand-text/60 z-20"
-          >
-            <X size={20} />
-          </button>
-
-          <div className="w-full md:w-72 h-72 rounded-3xl overflow-hidden border border-brand-secondary">
-            <motion.img
-              layout
-              layoutId={`image-${education.id}`}
-              src={education.image}
-              alt={education.school}
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-
-          <div className="flex-1 min-w-0">
-            <motion.h2
-              layout
-              layoutId={`title-${education.id}`}
-              className="text-3xl md:text-4xl font-bold text-brand-text mb-3 leading-tight"
-            >
-              {education.school}
-            </motion.h2>
-            <motion.p className="text-brand-text/80 text-lg mb-4 leading-relaxed">
-              {education.degree}
-            </motion.p>
-            <div className="grid gap-3 text-brand-text/60 text-sm md:text-base">
-              <div className="flex items-center gap-2">
-                <Calendar size={16} className="text-brand-primary" />
-                {education.timeframe}
-              </div>
-              {education.location && (
-                <div className="flex items-center gap-2">
-                  <MapPin size={16} className="text-brand-primary" />
-                  {education.location}
-                </div>
-              )}
-              {education.gpa && (
-                <div className="flex items-center gap-2">
-                  <Award size={16} className="text-brand-primary" />
-                  GPA: {education.gpa}
-                </div>
-              )}
-            </div>
-            {education.tags && education.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-4">
-                {education.tags.map(tag => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 bg-brand-secondary/40 text-brand-text/60 text-xs font-semibold rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 p-2 rounded-full bg-brand-bg/40 hover:bg-brand-secondary/50 transition-colors text-brand-text/60 z-20"
+        >
+          <X size={20} />
+        </button>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -98,6 +42,62 @@ export default function EducationDetail({ education, onClose }: EducationDetailP
           transition={{ delay: 0.1 }}
           className="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar"
         >
+          <div className="flex flex-col md:flex-row gap-8 mb-8">
+            <div className="w-full md:w-72 h-72 rounded-3xl overflow-hidden border border-brand-secondary flex-shrink-0">
+              <motion.img
+                layout
+                layoutId={`image-${education.id}`}
+                src={education.image}
+                alt={education.school}
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+
+            <div className="flex-1 min-w-0">
+              <motion.h2
+                layout
+                layoutId={`title-${education.id}`}
+                className="text-3xl md:text-4xl font-bold text-brand-text mb-3 leading-tight"
+              >
+                {education.school}
+              </motion.h2>
+              <motion.p className="text-brand-text/80 text-lg mb-4 leading-relaxed">
+                {education.degree}
+              </motion.p>
+              <div className="grid gap-3 text-brand-text/60 text-sm md:text-base">
+                <div className="flex items-center gap-2">
+                  <Calendar size={16} className="text-brand-primary" />
+                  {education.timeframe}
+                </div>
+                {education.location && (
+                  <div className="flex items-center gap-2">
+                    <MapPin size={16} className="text-brand-primary" />
+                    {education.location}
+                  </div>
+                )}
+                {/* {education.gpa && (
+                  <div className="flex items-center gap-2">
+                    <Award size={16} className="text-brand-primary" />
+                    GPA: {education.gpa}
+                  </div>
+                )} */}
+              </div>
+              {education.tags && education.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {education.tags.map(tag => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 bg-brand-secondary/40 text-brand-text/60 text-xs font-semibold rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
           <div className="w-full mx-auto space-y-10 text-brand-text/80 leading-relaxed">
             <div className="space-y-4">
               <h3 className="text-xl font-bold text-brand-text">Overview</h3>

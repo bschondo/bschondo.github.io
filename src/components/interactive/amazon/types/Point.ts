@@ -1,3 +1,5 @@
+import { Point as Poly2triPoint } from 'poly2tri';
+
 export interface Point {
   x: number;
   y: number;
@@ -15,4 +17,8 @@ export function newClampedPoint(x: number, y: number, dimensions: { width: numbe
         x: Math.max(0, Math.min(x, dimensions.width)),
         y: Math.max(0, Math.min(y, dimensions.height))
     };
+}
+
+export function toPoly2TriPoint(point: Point): Poly2triPoint {
+    return new Poly2triPoint(point.x, point.y);
 }

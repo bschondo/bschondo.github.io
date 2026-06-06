@@ -13,6 +13,7 @@ export default defineConfig(({mode}) => {
       tailwindcss()
     ],
     define: {
+      global: 'window',
     },
     resolve: {
       alias: {

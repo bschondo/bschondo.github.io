@@ -22,6 +22,17 @@ export default function App() {
     }
   }, [selectedExperience, selectedEducation]);
 
+  // Preload PDF on component mount
+  useEffect(() => {
+    const iframe = document.createElement('iframe');
+    iframe.src = 'resources/BenSchondorfResume2026.pdf';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+    return () => {
+      document.body.removeChild(iframe);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen selection:bg-brand-primary selection:text-brand-bg">
       {/* Navigation / Header */}
@@ -47,7 +58,7 @@ export default function App() {
             <div className="relative group">
               <div className="absolute -inset-1 bg-brand-primary/20 rounded-3xl blur-xl group-hover:bg-brand-primary/30 transition-all duration-500 opacity-70" />
               <img
-                src="resources/header.jpg"
+                src="resources/headshot.jpeg"
                 alt="Heading Image"
                 className="relative w-48 h-48 md:w-64 md:h-64 object-cover rounded-3xl border-2 border-brand-secondary"
                 referrerPolicy="no-referrer"
@@ -76,13 +87,13 @@ export default function App() {
                 </button>
                 
                 <div className="flex gap-4">
-                  <a href="#" className="p-3 bg-brand-secondary/40 text-brand-text hover:text-brand-primary border border-brand-secondary hover:border-brand-primary/40 rounded-xl transition-all">
+                  {/* <a href="#" className="p-3 bg-brand-secondary/40 text-brand-text hover:text-brand-primary border border-brand-secondary hover:border-brand-primary/40 rounded-xl transition-all">
                     <Github size={24} />
-                  </a>
-                  <a href="#" className="p-3 bg-brand-secondary/40 text-brand-text hover:text-brand-primary border border-brand-secondary hover:border-brand-primary/40 rounded-xl transition-all">
+                  </a> */}
+                  <a href="https://www.linkedin.com/in/benjamin-schondorf/" className="p-3 bg-brand-secondary/40 text-brand-text hover:text-brand-primary border border-brand-secondary hover:border-brand-primary/40 rounded-xl transition-all">
                     <Linkedin size={24} />
                   </a>
-                  <a href="#" className="p-3 bg-brand-secondary/40 text-brand-text hover:text-brand-primary border border-brand-secondary hover:border-brand-primary/40 rounded-xl transition-all">
+                  <a href="mailto:benschondorf@gmail.com" className="p-3 bg-brand-secondary/40 text-brand-text hover:text-brand-primary border border-brand-secondary hover:border-brand-primary/40 rounded-xl transition-all">
                     <Mail size={24} />
                   </a>
                 </div>
@@ -97,9 +108,9 @@ export default function App() {
                     className="overflow-hidden border border-brand-secondary rounded-2xl bg-brand-secondary/5"
                   >
                     <div className="p-4 bg-brand-secondary/20 flex justify-between items-center border-b border-brand-secondary">
-                      <span className="text-xs font-mono text-brand-text/40">RESUME_2026.PDF</span>
+                      <span className="text-xs font-mono text-brand-text/40">BenSchondorfResume2026.PDF</span>
                       <a 
-                        href="/resume.pdf" 
+                        href="resources/BenSchondorfResume2026.pdf" 
                         download 
                         className="text-[10px] font-bold uppercase tracking-widest text-brand-primary hover:underline"
                       >
@@ -108,8 +119,8 @@ export default function App() {
                     </div>
                     <div className="aspect-[1/1.41] w-full">
                       <iframe 
-                        src="/resume.pdf#toolbar=0&navpanes=0&scrollbar=1" 
-                        className="w-full h-full invert dark:invert-0"
+                        src="resources/BenSchondorfResume2026.pdf#toolbar=0&navpanes=0&scrollbar=1" 
+                        className="w-full h-full"
                         title="Ben Schondorf Resume"
                       />
                     </div>

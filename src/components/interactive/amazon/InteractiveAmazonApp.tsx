@@ -1,18 +1,19 @@
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { Play, RotateCcw, MapPin, MousePointer2, Settings, Maximize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { getPathPlanningResult, MotionProfile } from './pathPlannerUtils';
+import { MotionProfile } from './types/MotionProfile';
+import { NavigationGraph } from './NavigationGraph';
 import { newClampedPoint, Point } from './types/Point';
 import { Obstacle } from './types/Obstacle';
 
-export default function PathPlanner() {
+export default function InteractiveAmazonApp() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [start, setStart] = useState<Point>({ x: 50, y: 50 });
-  const [goal, setGoal] = useState<Point>({ x: 950, y: 350 });
+  const [goal, setGoal] = useState<Point>({ x: 350, y: 350 });
   const [obstacles, setObstacles] = useState<Obstacle[]>([
-    new Obstacle('1', 100, 0, 50, 200, dimensions),
-    new Obstacle('2', 250, 260, 50, 200, dimensions)
+    new Obstacle('1', 100, 0, 50, 200),
+    new Obstacle('2', 250, 150, 50, 250)
   ]);
 
   const [motionProfile, setMotionProfile] = useState<MotionProfile>({
@@ -20,8 +21,7 @@ export default function PathPlanner() {
     maxSpeed: 10,
     minSpeedDistance: 10,
     maxSpeedDistance: 80,
-    gridResolution: 50,
-    maxCurveAngle: 45,
+    gridResolution: 50
   });
   
   const [dragState, setDragState] = useState<{
@@ -120,6 +120,7 @@ export default function PathPlanner() {
       } else {
         // Start creation
         const newId = Date.now().toString();
+        setObstacles(prev => [...prev, new Obstacle(newId, point.x, point.y, 20, 20)]);
         setDragState({ type: 'create-obs', id: newId, origin: point, currentPoint: point });
         setSelectedId(newId);
       }
@@ -136,27 +137,27 @@ export default function PathPlanner() {
       setObstacles(prev => prev.map(o => {
         if (o.id !== dragState.id) return o;
         const origin = dragState.origin || { x: 0, y: 0 };
-        return o.updatePosition(newClampedPoint(point.x - origin.x, point.y - origin.y, dimensions));
+        const newX = Math.max(0, Math.min(point.x - origin.x, dimensions.width - o.width));
+        const newY = Math.max(0, Math.min(point.y - origin.y, dimensions.height - o.height));
+        return o.updatePosition({ x: newX, y: newY });
       }));
     }
     else if (dragState.type === 'resize-obs' && dragState.id) {
       setObstacles(prev => prev.map(o => {
         if (o.id !== dragState.id) return o;
-        return o.updateSize(
-          point.x - o.x,
-          point.y - o.y,
-          dimensions
-        );
+        return o.updateSize(point.x - o.x, point.y - o.y);
       }));
     }
     else if (dragState.type === 'create-obs' && dragState.id && dragState.origin) {
-      const { x, y } = newClampedPoint(point.x, point.y, dimensions);
-      const width = Math.abs(point.x - dragState.origin.x);
-      const height = Math.abs(point.y - dragState.origin.y);
-      
+      const clamped = newClampedPoint(point.x, point.y, dimensions);
+      const x = Math.min(dragState.origin.x, clamped.x);
+      const y = Math.min(dragState.origin.y, clamped.y);
+      const width = Math.abs(clamped.x - dragState.origin.x);
+      const height = Math.abs(clamped.y - dragState.origin.y);
+
       setObstacles(prev => prev.map(o => {
         if (o.id !== dragState.id) return o;
-        return new Obstacle(dragState.id!, x, y, width, height, dimensions);
+        return new Obstacle(dragState.id!, x, y, width, height);
       }));
     }
   }, [dragState, dimensions]);
@@ -181,11 +182,16 @@ export default function PathPlanner() {
     };
   }, [onPointerMove, onPointerUp]);
 
+  const navigationGraph = useMemo(() => {
+    if (dimensions.width === 0 || dimensions.height === 0) return null;
+    return new NavigationGraph(obstacles, dimensions);
+  }, [obstacles, dimensions]);
+
   // Pathfinding logic
   const result = useMemo(() => {
-    if (!showGraph) return null;
-    return getPathPlanningResult(start, goal, obstacles, dimensions, motionProfile);
-  }, [showGraph, obstacles, start, goal, dimensions, motionProfile]);
+    if (!showGraph || !navigationGraph) return null;
+    return navigationGraph.findPath(start, goal, motionProfile);
+  }, [showGraph, navigationGraph, start, goal, motionProfile]);
 
   return (
     <div className="bg-brand-secondary/30 border border-brand-secondary p-6 rounded-2xl my-8 select-none touch-none">
@@ -199,31 +205,31 @@ export default function PathPlanner() {
           {/* Settings Toggle */}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className={`p-2 rounded-lg transition-all ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all ${
               showSettings ? 'bg-brand-primary text-brand-bg hover:bg-brand-primary/90' : 'bg-brand-secondary/50 text-brand-text hover:bg-brand-secondary'
             }`}
             title="Tuning Settings"
           >
             <Settings size={18} />
+            {'Settings'}
           </button>
           <button
             onClick={() => {
               setObstacles([]);
               setShowGraph(false);
             }}
-            className="p-2 bg-brand-secondary/50 text-brand-text rounded-lg hover:bg-brand-secondary transition-all"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all bg-brand-accent text-brand-bg hover:bg-brand-accent/90"
             title="Clear All"
           >
             <RotateCcw size={18} />
+            Reset
           </button>
           <button
-            onClick={() => setShowGraph(!showGraph)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all ${
-              showGraph ? 'bg-brand-accent text-white hover:bg-brand-accent/90' : 'bg-brand-primary text-brand-bg hover:bg-brand-primary/90'
-            }`}
+            onClick={() => setShowGraph(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all bg-brand-primary text-brand-bg hover:bg-brand-primary/90"
           >
             <Play size={16} fill="currentColor" />
-            {showGraph ? 'Reset' : 'Execute Search'}
+            Execute Search
           </button>
         </div>
       </div>
@@ -262,12 +268,6 @@ export default function PathPlanner() {
                 min={40} max={150} step={5}
                 onChange={(v) => setMotionProfile((p: any) => ({ ...p, maxSpeedDistance: v }))}
               />
-              <TuningSlider 
-                label="Max Curve Angle" 
-                value={motionProfile.maxCurveAngle} 
-                min={0} max={90} step={5}
-                onChange={(v) => setMotionProfile((p: any) => ({ ...p, maxCurveAngle: v }))}
-              />
             </div>
           </motion.div>
         )}
@@ -279,6 +279,16 @@ export default function PathPlanner() {
         onContextMenu={(e) => e.preventDefault()}
         className="relative bg-brand-bg border border-brand-secondary/50 rounded-xl overflow-hidden mb-4 cursor-crosshair h-[400px]"
       >
+        {/* No Path Banner*/}
+        {showGraph && result && (!result.curvePath || result.curvePath.length === 0) && (
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-lg backdrop-blur-md shadow-lg pointer-events-none animate-in fade-in zoom-in duration-200">
+            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+            <span className="text-xs font-semibold text-red-400 uppercase tracking-wider select-none">
+              No Valid Path
+            </span>
+          </div>
+        )}
+
         {/* Grid Background */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
              style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '20px 20px' }} 
@@ -286,7 +296,7 @@ export default function PathPlanner() {
 
         {/* Triangulation Layer */}
         <AnimatePresence>
-          {showGraph && result && (
+          {showGraph && result && navigationGraph && (
             <motion.svg 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -294,31 +304,34 @@ export default function PathPlanner() {
               className="absolute inset-0 w-full h-full pointer-events-none"
             >
               <path
-                d={Array.from(result.legalTriangles).map(tIdx => {
-                  const p0 = result.points[result.delaunay.triangles[tIdx * 3]];
-                  const p1 = result.points[result.delaunay.triangles[tIdx * 3 + 1]];
-                  const p2 = result.points[result.delaunay.triangles[tIdx * 3 + 2]];
-                  return `M ${p0[0]},${p0[1]} L ${p1[0]},${p1[1]} L ${p2[0]},${p2[1]} Z`;
+                d={navigationGraph.triangles.map(tri => {
+                  const [p0, p1, p2] = tri.vertices();
+                  return `M ${p0.x},${p0.y} L ${p1.x},${p1.y} L ${p2.x},${p2.y} Z`;
                 }).join(' ')}
                 fill="none"
                 stroke="var(--color-brand-primary)"
                 strokeWidth="0.5"
                 className="opacity-20"
               />
-              
-              {/* Path Line */}
-              {result.path.length > 1 && (
-                <motion.path
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  d={`M ${result.path.map((p: { x: any; y: any; }) => `${p.x},${p.y}`).join(' L ')}`}
-                  fill="none"
-                  stroke="var(--color-brand-primary)"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]"
-                />
+
+              {/* Bezier Path */}
+              {result.curvePath.length > 0 && (
+                <>
+                  {result.curvePath.map((segment, index) => (
+                    <motion.path
+                      key={`bezier-${index}`}
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      d={`M ${segment.start.x},${segment.start.y} C ${segment.control1.x},${segment.control1.y} ${segment.control2.x},${segment.control2.y} ${segment.end.x},${segment.end.y}`}
+                      fill="none"
+                      stroke="var(--color-brand-primary)"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]"
+                    />
+                  ))}
+                </>
               )}
             </motion.svg>
           )}

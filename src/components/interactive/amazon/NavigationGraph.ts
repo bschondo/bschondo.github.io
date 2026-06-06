@@ -1,14 +1,13 @@
-import { Delaunay } from 'd3-delaunay';
+import { Point as Poly2TriPoint, SweepContext, Triangle as Poly2TriTriangle} from 'poly2tri';
+import * as turf from '@turf/turf';
+import { Feature, MultiPolygon, Polygon} from 'geojson';
 import { Point } from './types/Point';
 import { Triangle } from './types/Triangles';
 import { Obstacle } from './types/Obstacle';
-import { ObstacleDistanceGrid } from './types/ObstacleDistanceGrid';
-import { AStarSearch } from './AStarSearch';
 import { MotionProfile } from './types/MotionProfile';
 import { BezierSegment, PathOptimizer, PathOptimizerResult } from './PathOptimizer';
-
-const DISTANCE_GRID_RESOLUTION = 5;
-const WINDOW_BORDER_SAMPLE_POINTS = 3; // Sample points along the edges (besides the corners) of the window to improve pathfinding
+import { AStarSearch } from './AStarSearch';
+import { ObstacleDistanceGrid } from './types/ObstacleDistanceGrid';
 
 export interface NavigationPathResult {
     triangles: Triangle[];
@@ -16,73 +15,56 @@ export interface NavigationPathResult {
     curvePath: BezierSegment[];
 }
 
-const DEFAULT_MOTION_PROFILE = new MotionProfile(1, 10, 10, 80, 5, 60);
+const DEFAULT_MOTION_PROFILE: MotionProfile = {
+    minSpeed: 1,
+    maxSpeed: 10,
+    minSpeedDistance: 10,
+    maxSpeedDistance: 80,
+    gridResolution: 5
+};
 
 export class NavigationGraph {
     readonly triangles: Triangle[];
-    readonly obstacles: Obstacle[];
-    private delaunay: Delaunay;
-    private obstacleDistanceGrid: ObstacleDistanceGrid;
 
-    constructor(obstacles: Obstacle[], private readonly dimensions: { width: number; height: number }) {
-        const points = this.getTriangulationPoints(obstacles);
 
-        this.obstacleDistanceGrid = new ObstacleDistanceGrid(obstacles, dimensions, DISTANCE_GRID_RESOLUTION);
-
-        this.delaunay = Delaunay.from(points, (p: Point) => p.x, (p: Point) => p.y);
+    constructor(private readonly obstacles: Obstacle[], private readonly dimensions: { width: number; height: number }) {
         this.triangles = [];
-        this.obstacles = obstacles;
 
-        // Extract triangles from Delaunay triangulation and filter out those that intersect obstacles
-        for(let i = 0; i < this.delaunay.triangles.length/3; ++i) {
-            const pointIndices = [
-                this.delaunay.triangles[i*3],
-                this.delaunay.triangles[i*3 + 1],
-                this.delaunay.triangles[i*3 + 2]
-            ];
-            const triangle = [
-                { x: this.delaunay.points[pointIndices[0] * 2], y: this.delaunay.points[pointIndices[0] * 2 + 1] },
-                { x: this.delaunay.points[pointIndices[1] * 2], y: this.delaunay.points[pointIndices[1] * 2 + 1] },
-                { x: this.delaunay.points[pointIndices[2] * 2], y: this.delaunay.points[pointIndices[2] * 2 + 1] }
-            ];
-            if(triangle.length !== 3) {
-                throw new Error('Delaunay triangulation returned a non-triangle polygon');
+        // Determine border points and holes for the mesh.
+        const { polyCorners, innerHoles } = this.buildNavigationMesh(this.obstacles);
+
+        const sweepContext = new SweepContext(polyCorners);
+
+        // Directly feed the remaining isolated holes
+        innerHoles.forEach(hole => {
+            if (hole.length >= 3) {
+                sweepContext.addHole(hole);
             }
-            const tri = new Triangle(triangle[0], triangle[1], triangle[2], i);
-            if(this.isTriangleNavigable(tri)) {
-                this.triangles.push(tri);
-            }
+        });
+
+        // Compute the triangulation
+        try {
+            sweepContext.triangulate();
+        } catch (err) {
+            console.error("Triangulation failed. Winding orders might be flipped:", err);
+            throw err;
         }
 
-        // After all triangles are created, determine neighbors for pathfinding, ignoring those that were removed due to obstacles
-        const triangleIdToIndex = new Map<number, number>();
-        this.triangles.forEach((tri, filteredIndex) => {
-            triangleIdToIndex.set(tri.triangleId, filteredIndex);
-        });
-
-        this.triangles.forEach(tri => {
-            const neighborTriangleIds = this.getNeighborTriangles(tri.triangleId);
-            neighborTriangleIds.forEach(neighborId => {
-                const neighborIndex = triangleIdToIndex.get(neighborId);
-                const neighborTri = neighborIndex !== undefined ? this.triangles[neighborIndex] : undefined;
-                if (neighborTri) {
-                    tri.addNeighbor(neighborTri);
-                }
-            });
-        });
-
-        console.log("All triangles and neighbors extracted");
+        // Map structures to the custom Triangle wrappers and build neighbor links
+        this.buildTriangleMesh(sweepContext.getTriangles());
+        console.log(`Successfully generated a CDT mesh containing ${this.triangles.length} triangles.`);
     }
 
     public findPath(start: Point, goal: Point, motionProfile: MotionProfile = DEFAULT_MOTION_PROFILE): NavigationPathResult {
-        const aStar = new AStarSearch(this.triangles, this.obstacles, this.dimensions);
+        const distanceGrid = new ObstacleDistanceGrid(this.obstacles, this.dimensions, 2)
+        const aStar = new AStarSearch(this.triangles, distanceGrid);
         const trianglePath = aStar.executeSearch(start, goal);
         if (trianglePath.length === 0) {
             return { triangles: [], waypoints: [], curvePath: [] };
         }
 
-        const waypoints = [start, ...trianglePath.map(tri => tri.center), goal];
-        const pathOptimizer = new PathOptimizer(this.obstacles, this.dimensions);
+        const waypoints = [start, ...trianglePath.slice(1,-1).map(tri => tri.center), goal];
+        const pathOptimizer = new PathOptimizer(this.obstacles, this.dimensions, distanceGrid);
         const optimizerResult: PathOptimizerResult = pathOptimizer.optimize(waypoints, trianglePath, motionProfile);
 
         return {
@@ -92,102 +74,126 @@ export class NavigationGraph {
         };
     }
 
-    private getTriangulationPoints(obstacles: Obstacle[]): Set<Point> {
-        const points = new Set<Point>();
-        const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
+    private buildNavigationMesh(obstacles: Obstacle[]): { polyCorners: Poly2TriPoint[], innerHoles: Poly2TriPoint[][] } {
+        // Create base screen canvas polygon
+        const windowPoly = turf.polygon([[
+            [0, 0],
+            [this.dimensions.width, 0],
+            [this.dimensions.width, this.dimensions.height],
+            [0, this.dimensions.height],
+            [0, 0] // Closes the loop
+        ]]);
 
-        const addPoint = (x: number, y: number) => {
-            const cx = clamp(x, 0, this.dimensions.width);
-            const cy = clamp(y, 0, this.dimensions.height);
-            points.add({ x: cx, y: cy });
+        if (obstacles.length === 0) {
+            return { polyCorners: this.convertToPoly2TriPoints(windowPoly.geometry.coordinates[0].slice(0, -1)), innerHoles: [] };
         }
 
-        // Add corners of the window
-        addPoint(0, 0);
-        addPoint(this.dimensions.width, 0);
-        addPoint(0, this.dimensions.height);
-        addPoint(this.dimensions.width, this.dimensions.height);
+        // Dissolve all obstacles into unified solid shapes
+        const mergedObstacles = this.getMergedObstacles(obstacles);
 
-        // Sample points along the edges of the window to improve pathfinding around borders
-        for(let i = 1; i <= WINDOW_BORDER_SAMPLE_POINTS; ++i) {
-            const ratio = i / (WINDOW_BORDER_SAMPLE_POINTS + 1);
-            addPoint(this.dimensions.width * ratio, 0);
-            addPoint(this.dimensions.width * ratio, this.dimensions.height);
-            addPoint(0, this.dimensions.height * ratio);
-            addPoint(this.dimensions.width, this.dimensions.height * ratio);
-        }
+        // Subtract obstacles from screen to get the exact walkable space
+        const navigableSpace = turf.difference(turf.featureCollection([windowPoly, mergedObstacles]));
+        if (!navigableSpace) throw new Error("No navigable space remains on screen!");
 
-        // Add corners of obstacles
-        obstacles.forEach(obs => {
-            addPoint(obs.x, obs.y);
-            addPoint(obs.x + obs.width, obs.y);
-            addPoint(obs.x, obs.y + obs.height);
-            addPoint(obs.x + obs.width, obs.y + obs.height);
+        // Parse the resulting GeoJSON geometry into poly2tri loops
+        return this.parseNavigableSpace(navigableSpace);
+    }
 
-            // const paddedCorners: [number, number][] = [
-            //   [obs.x - PADDING, obs.y - PADDING],
-            //   [obs.x + obs.width + PADDING, obs.y - PADDING],
-            //   [obs.x - PADDING, obs.y + obs.height + PADDING],
-            //   [obs.x + obs.width + PADDING, obs.y + obs.height + PADDING]
-            // ];
+    /**
+     * Unpacks Turf's nested coordinate outputs into outer borders vs inner islands.
+     */
+    private parseNavigableSpace(navigableSpace: Feature<Polygon | MultiPolygon>): { polyCorners: poly2tri.Point[], innerHoles: poly2tri.Point[][] } {
+        const polyCorners: poly2tri.Point[] = [];
+        const innerHoles: poly2tri.Point[][] = [];
 
-            // paddedCorners.forEach(([px, py]) => addPoint(px, py));
+        // Safely standardize Polygon vs MultiPolygon coordinates into a single structure
+        const geometries = navigableSpace.geometry.type === 'MultiPolygon' 
+            ? navigableSpace.geometry.coordinates 
+            : [navigableSpace.geometry.coordinates];
 
-            // addPoint(obs.x + obs.width / 2, obs.y - PADDING);
-            // addPoint(obs.x + obs.width / 2, obs.y + obs.height + PADDING);
-            // addPoint(obs.x - PADDING, obs.y + obs.height / 2);
-            // addPoint(obs.x + obs.width + PADDING, obs.y + obs.height / 2);
+        geometries.forEach((polygonCoords, geomIndex) => {
+            polygonCoords.forEach((ring, ringIndex) => {
+                // Strip the duplicate final coordinate because poly2tri forbids it
+                const vertices = this.convertToPoly2TriPoints(ring.slice(0, -1));
+                
+                // The very first ring of the very first polygon is the outer screen frame
+                if (geomIndex === 0 && ringIndex === 0) {
+                    polyCorners.push(...vertices);
+                } else {
+                    // All subsequent rings are isolated holes or detached islands
+                    innerHoles.push(vertices);
+                }
+            });
         });
 
-        return points;
+        return { polyCorners, innerHoles };
     }
 
-    private isTriangleNavigable(triangle: Triangle): boolean {
-        return !this.obstacles.some(o => o.intersectsTriangle(triangle));
+    private convertToPoly2TriPoints(coords: number[][]): Poly2TriPoint[] {
+        return coords.map(coord => new Poly2TriPoint(coord[0], coord[1]));
     }
 
-    private getNeighborTriangles(triangleIndex: number): number[] {
-        const halfedges = this.delaunay.halfedges;
-        const neighbors: number[] = [];
-        
-        // A triangle has 3 half-edges (start indices: 3*t, 3*t+1, 3*t+2)
-        for (let i = 0; i < 3; i++) {
-            const halfedgeIndex = triangleIndex * 3 + i;
-            
-            // The opposite half-edge in the adjacent triangle
-            const oppositeHalfedge = halfedges[halfedgeIndex];
-            
-            // If oppositeHalfedge is -1, this edge is on the convex hull (has no neighbor)
-            if (oppositeHalfedge !== -1) {
-                // Divide by 3 to get the adjacent triangle index
-                const neighborTriangleIndex = Math.floor(oppositeHalfedge / 3);
-                neighbors.push(neighborTriangleIndex);
-            }
+    private getMergedObstacles(obstacles: Obstacle[]): Feature<Polygon | MultiPolygon> {
+        const turfPolygons = obstacles.map(obs => obs.toTurfPolygon());
+
+        if (turfPolygons.length === 1) {
+            return turfPolygons[0];
         }
+
+        const collection = turf.featureCollection(turfPolygons);
+        const mergedObstacles = turf.union(collection);
+        if (!mergedObstacles) throw new Error("Failed to merge obstacles using Turf.");
         
-        return neighbors;
+        return mergedObstacles;
     }
 
-    private getNeighborTriangles(triangleIndex: number): number[] {
-        const halfedges = this.delaunay.halfedges;
-        const neighbors: number[] = [];
-        
-        // A triangle has 3 half-edges (start indices: 3*t, 3*t+1, 3*t+2)
-        for (let i = 0; i < 3; i++) {
-            const halfedgeIndex = triangleIndex * 3 + i;
-            
-            // The opposite half-edge in the adjacent triangle
-            const oppositeHalfedge = halfedges[halfedgeIndex];
-            
-            // If oppositeHalfedge is -1, this edge is on the convex hull (has no neighbor)
-            if (oppositeHalfedge !== -1) {
-                // Divide by 3 to get the adjacent triangle index
-                const neighborTriangleIndex = Math.floor(oppositeHalfedge / 3);
-                neighbors.push(neighborTriangleIndex);
+    /**
+     * Transforms raw poly2tri triangles into Triangle components and maps adjacent edges to set up neighbors.
+     */
+    private buildTriangleMesh(p2tTriangles: Poly2TriTriangle[]): void {
+        const p2tToCustomMap = new Map<Poly2TriTriangle, Triangle>();
+
+        // Map poly2tri triangles to custom wrappers
+        p2tTriangles.forEach((p2tTri, sequentialId) => {
+            const rawTri = p2tTri as any;
+            const p1 = typeof rawTri.getPoint === 'function' ? rawTri.getPoint(0) : rawTri.GetPoint(0);
+            const p2 = typeof rawTri.getPoint === 'function' ? rawTri.getPoint(1) : rawTri.GetPoint(1);
+            const p3 = typeof rawTri.getPoint === 'function' ? rawTri.getPoint(2) : rawTri.GetPoint(2);
+
+            // Filter out artificial micro-gaps from edge perturbations
+            const area = Math.abs(p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y)) / 2;
+            if (area < 0.1) {
+                return;
             }
-        }
-        
-        return neighbors;
-    }
 
+            const v1 = { x: p1.x, y: p1.y };
+            const v2 = { x: p2.x, y: p2.y };
+            const v3 = { x: p3.x, y: p3.y };
+
+            const customTri = new Triangle(v1, v2, v3, sequentialId);
+            this.triangles.push(customTri);
+            p2tToCustomMap.set(p2tTri, customTri);
+        });
+
+        // Connect up Neighbors securely
+        p2tTriangles.forEach(p2tTri => {
+            const currentCustomTri = p2tToCustomMap.get(p2tTri);
+            if (!currentCustomTri) return;
+
+            const rawTri = p2tTri as any;
+
+            for (let i = 0; i < 3; i++) {
+                const p2tNeighbor = typeof rawTri.getNeighbor === 'function' 
+                    ? rawTri.getNeighbor(i) 
+                    : rawTri.GetNeighbor(i);
+                
+                if (p2tNeighbor) {
+                    const customNeighbor = p2tToCustomMap.get(p2tNeighbor);
+                    if (customNeighbor) {
+                        currentCustomTri.addNeighbor(customNeighbor);
+                    }
+                }
+            }
+        });
+    }
 }

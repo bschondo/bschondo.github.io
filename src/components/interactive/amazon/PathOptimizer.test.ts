@@ -7,11 +7,17 @@ import { MotionProfile } from './types/MotionProfile';
 
 describe('PathOptimizer', () => {
     const dimensions = { width: 200, height: 200 };
-    const motionProfile = new MotionProfile(1, 10, 10, 80, 5, 60);
+    const motionProfile: MotionProfile = {
+        minSpeed: 1,
+        maxSpeed: 10,
+        minSpeedDistance: 10,
+        maxSpeedDistance: 80,
+        gridResolution: 5
+    };
 
-    it('should prune a redundant centroid waypoint when the path contains multiple triangle centroids', () => {
+
+    it('when no obstacles optimize return a straight line path', () => {
         const start: Point = { x: 20, y: 20 };
-        const mid: Point = { x: 40, y: 40 };
         const goal: Point = { x: 80, y: 80 };
 
         const triangle1 = new Triangle(
@@ -27,21 +33,19 @@ describe('PathOptimizer', () => {
             1
         );
 
+
         const optimizer = new PathOptimizer([], dimensions);
         const result = optimizer.optimize(
-            [start, triangle1.center, mid, triangle2.center, goal],
+            [start, goal],
             [triangle1, triangle2],
             motionProfile
         );
 
-        expect(result.waypoints.length).toBeLessThan(5);
+        expect(result.waypoints.length).toEqual(2);
         expect(result.waypoints[0]).toEqual(start);
         expect(result.waypoints[result.waypoints.length - 1]).toEqual(goal);
-        expect(result.curvePath.length).toBeGreaterThan(0);
-        expect(result.curvePath[0]).toHaveProperty('start');
-        expect(result.curvePath[0]).toHaveProperty('control1');
-        expect(result.curvePath[0]).toHaveProperty('control2');
-        expect(result.curvePath[0]).toHaveProperty('end');
+        expect(result.curvePath.length).toEqual(1);
+        expect(result.curvePath[0]).toEqual({start, control1: { x: 40, y: 40 }, control2: { x: 60, y: 60 }, end: goal })
     });
 
     it('should return a safe curve path for a path with obstacles present', () => {
@@ -53,7 +57,7 @@ describe('PathOptimizer', () => {
             { x: 100, y: 100 },
             0
         );
-        const obstacle = new Obstacle('obstacle-1', 80, 30, 40, 40, dimensions);
+        const obstacle = new Obstacle('obstacle-1', 80, 30, 40, 40);
 
         const optimizer = new PathOptimizer([obstacle], dimensions);
         const result = optimizer.optimize([start, triangle.center, goal], [triangle], motionProfile);

@@ -1,7 +1,8 @@
-import { Point } from './types/Point';
+import { newClampedPoint, Point } from './types/Point';
 import { Triangle } from './types/Triangles';
 import { Obstacle } from './types/Obstacle';
-import { MotionProfile } from './types/MotionProfile';
+import { MotionProfile, speedForDistance } from './types/MotionProfile';
+import { ObstacleDistanceGrid } from './types/ObstacleDistanceGrid';
 
 export interface BezierSegment {
     start: Point;
@@ -16,7 +17,14 @@ export interface PathOptimizerResult {
 }
 
 export class PathOptimizer {
-    constructor(private obstacles: Obstacle[], private readonly dimensions: { width: number; height: number }) {}
+    private readonly obstacleDistanceGrid: ObstacleDistanceGrid;
+
+    constructor(
+        private readonly obstacles: Obstacle[], 
+        private readonly dimensions: { width: number; height: number },
+        obstacleDistanceGrid?: ObstacleDistanceGrid) {
+            this.obstacleDistanceGrid = obstacleDistanceGrid != null ? obstacleDistanceGrid : new ObstacleDistanceGrid(obstacles, dimensions, 2);
+        }
 
     public optimize(waypoints: Point[], trianglePath: Triangle[], motionProfile: MotionProfile): PathOptimizerResult {
         const prunedWaypoints = this.pruneWaypointsInTrianglePath(waypoints, trianglePath);
@@ -26,47 +34,64 @@ export class PathOptimizer {
     }
 
     private pruneWaypointsInTrianglePath(waypoints: Point[], trianglePath: Triangle[]): Point[] {
-        if (waypoints.length <= 3) {
+        if (waypoints.length <= 2) {
             return waypoints;
         }
 
-        const keepFlags = Array(waypoints.length).fill(true);
-        let changed = true;
+        const pruned: Point[] = [waypoints[0]];
+        let currentIdx = 0;
 
-        while (changed) {
-            changed = false;
-            let prevKeptIndex = 0;
+        while (currentIdx < waypoints.length - 1) {
+            let furthestVisibleIdx = currentIdx + 1;
 
-            for (let waypointIndex = 1; waypointIndex < waypoints.length - 1; waypointIndex++) {
-                if (!keepFlags[waypointIndex]) {
-                    continue;
+            // Look ahead to find the furthest point we can directly connect to
+            for (let nextIdx = currentIdx + 2; nextIdx < waypoints.length; nextIdx++) {
+                const fromPoint = waypoints[currentIdx];
+                const toPoint = waypoints[nextIdx];
+
+                // Verify if the line segment stays entirely valid within your triangle channel
+                if (this.isSegmentValid(fromPoint, toPoint, currentIdx, nextIdx, trianglePath)) {
+                    furthestVisibleIdx = nextIdx;
+                } else {
+                    // If it fails, we cannot skip any further down this line
+                    break;
                 }
+            }
 
-                const nextKeptIndex = this.findNextKeptIndex(keepFlags, waypointIndex);
-                if (nextKeptIndex === -1) {
-                    continue;
-                }
+            pruned.push(waypoints[furthestVisibleIdx]);
+            currentIdx = furthestVisibleIdx; // Move our start point forward
+        }
 
-                const triangleIndex = waypointIndex - 1;
-                const triangle = trianglePath[triangleIndex];
-                if (!triangle) {
-                    continue;
-                }
+        return pruned;
+    }
 
-                const fromPoint = waypoints[prevKeptIndex];
-                const toPoint = waypoints[nextKeptIndex];
+    private isSegmentValid(
+        fromPoint: Point, 
+        toPoint: Point, 
+        startIdx: number, 
+        endIdx: number, 
+        trianglePath: Triangle[]
+    ): boolean {
+        // Determine which triangles correspond to this section of the path
+        // Typically, waypoints match 1:1 or rely on a portal corridor
+        const startTriangleIdx = startIdx; 
+        const endTriangleIdx = endIdx - 1; 
 
-                if (this.segmentIntersectsTriangle(fromPoint, toPoint, triangle)) {
-                    keepFlags[waypointIndex] = false;
-                    changed = true;
-                }
+        // Every triangle in this corridor segment must contain or intersect the line
+        for (let i = startTriangleIdx; i <= endTriangleIdx; i++) {
+            const triangle = trianglePath[i];
+            if (!triangle) continue;
 
-                prevKeptIndex = waypointIndex;
+            // If the shortcut exits the walkable channel triangle, it is invalid
+            if (!triangle.containsOrIntersectsSegment(fromPoint, toPoint)) {
+                return false;
             }
         }
 
-        return waypoints.filter((_, index) => keepFlags[index]);
+        return true;
     }
+
+
 
     private findNextKeptIndex(keepFlags: boolean[], index: number): number {
         for (let next = index + 1; next < keepFlags.length; next++) {
@@ -139,11 +164,8 @@ export class PathOptimizer {
     }
 
     private optimizeWaypoints(waypoints: Point[], motionProfile: MotionProfile): Point[] {
-        if (waypoints.length < 3) {
-            return waypoints;
-        }
-
-        let bestWaypoints = waypoints.map(point => ({ ...point }));
+        
+        let bestWaypoints = structuredClone(waypoints);
         let bestCost = this.computeCurveTravelTime(bestWaypoints, motionProfile);
         let stepSize = Math.max(this.dimensions.width, this.dimensions.height) * 0.08;
         const minStep = 0.5;
@@ -165,18 +187,19 @@ export class PathOptimizer {
                 const originalPoint = bestWaypoints[index];
 
                 for (const direction of directions) {
-                    const offsetPoint = this.clampPoint({
-                        x: originalPoint.x + direction.x,
-                        y: originalPoint.y + direction.y
-                    });
+                    const offsetPoint = newClampedPoint(originalPoint.x + direction.x, originalPoint.y + direction.y, this.dimensions);
+
+                    if (offsetPoint === originalPoint) {
+                        continue
+                    }
 
                     const candidateWaypoints = bestWaypoints.map((point, idx) => idx === index ? offsetPoint : { ...point });
-                    const candidateCurve = this.buildCurvePath(candidateWaypoints);
-                    if (!this.isCurveSafe(candidateCurve)) {
+                    const candidatePath = this.sampleEntireCurve(candidateWaypoints);
+                    if (!this.isPathSafe(candidatePath)) {
                         continue;
                     }
 
-                    const candidateCost = this.computeCurveTravelTime(candidateWaypoints, motionProfile);
+                    const candidateCost = this.computeCurveTravelTime(candidatePath, motionProfile);
                     if (candidateCost < bestCost) {
                         bestCost = candidateCost;
                         bestWaypoints = candidateWaypoints;
@@ -201,17 +224,21 @@ export class PathOptimizer {
     }
 
     private buildCurvePath(waypoints: Point[]): BezierSegment[] {
+        // A curve requires at least a start point and an end point.
         if (waypoints.length < 2) {
             return [];
         }
 
+        // Calculate tangent vectors for every waypoint to determine curve direction and speed.
         const tangents = waypoints.map((point, index) => {
+            // First point: Tangent points directly toward the second point.
             if (index === 0) {
                 return {
                     x: waypoints[1].x - point.x,
                     y: waypoints[1].y - point.y
                 };
             }
+            // Last point: Tangent points directly away from the second-to-last point.
             if (index === waypoints.length - 1) {
                 return {
                     x: point.x - waypoints[index - 1].x,
@@ -219,6 +246,8 @@ export class PathOptimizer {
                 };
             }
 
+            // Middle points (Catmull-Rom step): Look at previous and next points.
+            // The tangent is half the distance between them, ensuring smooth transitions.
             return {
                 x: (waypoints[index + 1].x - waypoints[index - 1].x) * 0.5,
                 y: (waypoints[index + 1].y - waypoints[index - 1].y) * 0.5
@@ -227,23 +256,30 @@ export class PathOptimizer {
 
         const segments: BezierSegment[] = [];
 
+        // 3. Connect each pair of sequential waypoints with a cubic Bezier curve.
         for (let i = 0; i < waypoints.length - 1; i++) {
-            const p0 = waypoints[i];
-            const p3 = waypoints[i + 1];
+            const p0 = waypoints[i];     // Start anchor point of current segment
+            const p3 = waypoints[i + 1]; // End anchor point of current segment
+            
+            // Control point 1 extends outward 1/3 of the distance along the start point's tangent.
             const cp1 = {
                 x: p0.x + tangents[i].x / 3,
                 y: p0.y + tangents[i].y / 3
             };
+            
+            // Control point 2 pulls backward 1/3 of the distance along the end point's tangent.
             const cp2 = {
                 x: p3.x - tangents[i + 1].x / 3,
                 y: p3.y - tangents[i + 1].y / 3
             };
 
+            // Store the completed segment coordinates.
             segments.push({ start: p0, control1: cp1, control2: cp2, end: p3 });
         }
 
         return segments;
     }
+
 
     private evaluateCubicBezier(p0: Point, p1: Point, p2: Point, p3: Point, t: number): Point {
         const invT = 1 - t;
@@ -267,25 +303,91 @@ export class PathOptimizer {
         return result;
     }
 
-    private computeCurveTravelTime(waypoints: Point[], motionProfile: MotionProfile): number {
-        const curveSegments = this.buildCurvePath(waypoints);
-        let travelTime = 0;
+    /**
+     * Direct path sampler that calculates control points on the fly.
+     * Reduces memory allocations when you only need the final coordinates.
+     */
+    private sampleEntireCurve(waypoints: Point[], samplesPerSegment = 16): Point[] {
+        if (waypoints.length < 2) {
+            return [];
+        }
 
-        for (const segment of curveSegments) {
-            const sampled = this.sampleBezierSegment(segment);
-            for (let i = 0; i < sampled.length - 1; i++) {
-                const startPoint = sampled[i];
-                const endPoint = sampled[i + 1];
-                const distance = this.distance(startPoint, endPoint);
-                const midpoint = {
-                    x: (startPoint.x + endPoint.x) / 2,
-                    y: (startPoint.y + endPoint.y) / 2
-                };
-                const clearance = this.getClearance(midpoint);
-                const speed = motionProfile.speedForDistance(clearance);
-                travelTime += distance / Math.max(speed, 0.001);
+        const result: Point[] = [];
+        const len = waypoints.length;
+
+        // Pre-allocate array size for performance if needed, or push sequentially.
+        // We loop through each segment between sequential waypoints.
+        for (let i = 0; i < len - 1; i++) {
+            const p0 = waypoints[i];
+            const p3 = waypoints[i + 1];
+
+            // 1. Calculate Tangent for the Start Point (p0) on the fly
+            let tx0, ty0;
+            if (i === 0) {
+                tx0 = waypoints[1].x - p0.x;
+                ty0 = waypoints[1].y - p0.y;
+            } else {
+                tx0 = (waypoints[i + 1].x - waypoints[i - 1].x) * 0.5;
+                ty0 = (waypoints[i + 1].y - waypoints[i - 1].y) * 0.5;
+            }
+
+            // 2. Calculate Tangent for the End Point (p3) on the fly
+            let tx3, ty3;
+            if (i + 1 === len - 1) {
+                tx3 = p3.x - waypoints[i].x;
+                ty3 = p3.y - waypoints[i].y;
+            } else {
+                tx3 = (waypoints[i + 2].x - waypoints[i].x) * 0.5;
+                ty3 = (waypoints[i + 2].y - waypoints[i].y) * 0.5;
+            }
+
+            // 3. Compute Control Points inline
+            const cp1x = p0.x + tx0 / 3;
+            const cp1y = p0.y + ty0 / 3;
+            const cp2x = p3.x - tx3 / 3;
+            const cp2y = p3.y - ty3 / 3;
+
+            // 4. Sample this specific segment directly into the result array
+            // To avoid duplicate points at segment junctions, start at j = 1 for subsequent segments.
+            const startJ = (i === 0) ? 0 : 1;
+
+            for (let j = startJ; j <= samplesPerSegment; j++) {
+                const t = j / samplesPerSegment;
+                
+                // Inline evaluation or call to your existing evaluateCubicBezier method:
+                result.push(this.evaluateCubicBezier(
+                    p0, 
+                    { x: cp1x, y: cp1y }, 
+                    { x: cp2x, y: cp2y }, 
+                    p3, 
+                    t
+                ));
             }
         }
+
+        return result;
+    }
+
+    private computeCurveTravelTime(sampledCurvePath: Point[], motionProfile: MotionProfile): number {
+        let travelTime = 0;
+
+        for (let i = 0; i < sampledCurvePath.length - 1; i++) {
+            const startPoint = sampledCurvePath[i];
+            const endPoint = sampledCurvePath[i + 1];
+            const distance = this.distance(startPoint, endPoint);
+            const midpoint = {
+                x: (startPoint.x + endPoint.x) / 2,
+                y: (startPoint.y + endPoint.y) / 2
+            };
+            // const clearance = this.obstacleDistanceGrid.getClearance(midpoint)
+            const clearance = this.getClearance(midpoint);
+            if (clearance <= 0) {
+                return Infinity;
+            }
+            const speed = speedForDistance(motionProfile, clearance);
+            travelTime += distance / Math.max(speed, 0.001);
+        }
+    
 
         return travelTime;
     }
@@ -305,23 +407,15 @@ export class PathOptimizer {
         return clearance;
     }
 
-    private isCurveSafe(curve: BezierSegment[]): boolean {
-        for (const segment of curve) {
-            const sampled = this.sampleBezierSegment(segment);
-            for (const point of sampled) {
-                if (this.obstacles.some(obstacle => obstacle.containsPoint(point))) {
+    private isPathSafe(points: Point[]): boolean {
+        for(const obstacle of this.obstacles) {
+            for(const point of points) {
+                if (obstacle.containsPoint(point)) {
                     return false;
                 }
             }
         }
         return true;
-    }
-
-    private clampPoint(point: Point): Point {
-        return {
-            x: Math.max(0, Math.min(point.x, this.dimensions.width)),
-            y: Math.max(0, Math.min(point.y, this.dimensions.height))
-        };
     }
 
     private distance(a: Point, b: Point): number {

@@ -1,10 +1,11 @@
 import { Obstacle } from "./types/Obstacle";
+import { ObstacleDistanceGrid } from "./types/ObstacleDistanceGrid";
 import { Point } from "./types/Point";
 import { Triangle } from "./types/Triangles";
 
 
 export class AStarSearch {
-    constructor(private triangles: Triangle[], private obstacles: Obstacle[], private dimensions: { width: number; height: number }) {}
+    constructor(private readonly triangles: Triangle[], private readonly obstacleDistanceGrid: ObstacleDistanceGrid) {}
 
     // A* search on the triangle graph to find a path from start to goal, returning a list of points representing the path
     // The cost should be the expected travel time along the line segment between triangle centers, which can be estimated 
@@ -67,19 +68,7 @@ export class AStarSearch {
     }
 
     private findContainingTriangles(point: Point): Triangle[] {
-        return this.triangles.filter(tri => this.pointInTriangle(point, tri));
-    }
-
-    private pointInTriangle(point: Point, triangle: Triangle): boolean {
-        const [p0, p1, p2] = triangle.vertices();
-        const area = 0.5 * (-p1.y * p2.x + p0.y * (-p1.x + p2.x) + p0.x * (p1.y - p2.y) + p1.x * p2.y);
-        if (area === 0) {
-            return false;
-        }
-
-        const s = 1 / (2 * area) * (p0.y * p2.x - p0.x * p2.y + (p2.y - p0.y) * point.x + (p0.x - p2.x) * point.y);
-        const t = 1 / (2 * area) * (p0.x * p1.y - p0.y * p1.x + (p0.y - p1.y) * point.x + (p1.x - p0.x) * point.y);
-        return s >= 0 && t >= 0 && 1 - s - t >= 0;
+        return this.triangles.filter(tri => tri.pointInTriangle(point));
     }
 
     private distance(a: Point, b: Point): number {
@@ -90,24 +79,9 @@ export class AStarSearch {
         return this.distance(triangle.center, goal);
     }
 
-    private getPointClearance(point: Point): number {
-        let clearance = Math.max(
-            0,
-            Math.min(point.x, this.dimensions.width - point.x, point.y, this.dimensions.height - point.y)
-        );
-
-        for (const obstacle of this.obstacles) {
-            const dx = Math.max(obstacle.x - point.x, 0, point.x - (obstacle.x + obstacle.width));
-            const dy = Math.max(obstacle.y - point.y, 0, point.y - (obstacle.y + obstacle.height));
-            clearance = Math.min(clearance, Math.hypot(dx, dy));
-        }
-
-        return clearance;
-    }
-
     private getTraversalCost(from: Triangle, to: Triangle): number {
         const distance = this.distance(from.center, to.center);
-        const clearance = Math.min(this.getPointClearance(from.center), this.getPointClearance(to.center));
+        const clearance = Math.min(this.obstacleDistanceGrid.getClearance(from.center), this.obstacleDistanceGrid.getClearance(to.center));
         const penalty = clearance < 1 ? 1000 : 1 + Math.max(0, 1 - Math.min(clearance / 50, 1));
         return distance * penalty;
     }

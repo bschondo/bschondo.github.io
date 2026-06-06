@@ -1,22 +1,18 @@
-export class MotionProfile {
-    constructor(
-        public readonly minSpeed: number,
-        public readonly maxSpeed: number,
-        public readonly minSpeedDistance: number,
-        public readonly maxSpeedDistance: number,
-        public readonly gridResolution: number,
-        public readonly maxCurveAngle: number
-    ) {}
+export interface MotionProfile {
+    minSpeed: number;
+    maxSpeed: number;
+    minSpeedDistance: number;
+    maxSpeedDistance: number;
+    gridResolution: number;
+}
 
-    public speedForDistance(distance: number): number {
-        if (distance <= this.minSpeedDistance) {
-            return this.minSpeed;
-        } else if (distance >= this.maxSpeedDistance) {
-            return this.maxSpeed;
-        } else {
-            // Linear interpolation between min and max speed based on distance
-            const ratio = (distance - this.minSpeedDistance) / (this.maxSpeedDistance - this.minSpeedDistance);
-            return this.minSpeed + ratio * (this.maxSpeed - this.minSpeed);
-        }
+export function speedForDistance(profile: MotionProfile, distance: number): number {
+    if (distance <= profile.minSpeedDistance) {
+        return profile.minSpeed;
+    } else if (distance >= profile.maxSpeedDistance) {
+        return profile.maxSpeed;
+    } else {
+        const ratio = (distance - profile.minSpeedDistance) / (profile.maxSpeedDistance - profile.minSpeedDistance);
+        return profile.minSpeed + ratio * (profile.maxSpeed - profile.minSpeed);
     }
 }

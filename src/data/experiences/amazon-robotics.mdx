@@ -1,4 +1,4 @@
-import PathPlanner from '../../components/interactive/amazon/InteractiveAmazonApp';
+import InteractiveAmazonApp from '../../components/interactive/amazon/InteractiveAmazonApp';
 
 ## Scope
 
@@ -15,6 +15,8 @@ The work spans computational geometry, graph algorithms, and distributed systems
 
 ## Interactive Path Planner
 
-Below is a simplified demo of the path planning generation process. We use geometric decomposition to turn a continuous floor space into a searchable graph of connected regions. An A* search is performed on the graph to optimize for travel time where the estimated speed scales with how close the segment is to any obstacle.
+Below is a demo of the simplified path planning generation process happening in the Amazon fulfillment centers. The navigable portion of the floor is decomposed into a triangulated graph. An A* search is performed on the graph to optimize for travel time where the estimated speed scales with how close the segment is to any obstacle.
+
+You can tune the path provided by adjusting the min/max distance and speed in the settings. The chosen path minimizes the travel time which is determined using the expected speed and the distance to nearest obstacle at each point along the path. The speed scales linearly from the minimum speed at the minimum distance to the maximum speed at the maximum distance.
 
 <InteractiveAmazonApp />
